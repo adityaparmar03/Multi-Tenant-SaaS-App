@@ -1,0 +1,11 @@
+1. install node.js from https://nodejs.org/en/ .
+2. npn install -g express-generator.
+3. express "Project Name".
+4. cd "Project Name".
+5. npm install  for installing the dependencies.
+6. npm uninstall jade --save to remove jade. (if you want to use different view engine).
+7. npm install ejs --save .
+8. call ejs by var ejs = require('ejs');
+9. change app.set to this way : app.set('view engine', 'ejs');
+10. Go to view folder and change content and save with .ejs .
+11. you good to go . Run app by npm start.
