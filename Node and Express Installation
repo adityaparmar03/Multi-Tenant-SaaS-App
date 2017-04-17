@@ -1,5 +1,5 @@
 1. install node.js from https://nodejs.org/en/ .
-2. npn install -g express-generator.
+2. npm install -g express-generator.
 3. express "Project Name".
 4. cd "Project Name".
 5. npm install  for installing the dependencies.
