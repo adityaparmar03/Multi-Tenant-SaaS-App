@@ -60,16 +60,16 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
 
-                            <div>Choose Tenant :-
+                            <div><h4>Choose Tenant :-
                                 <select id="tenant_choice" class="btn btn-primary dropdown-toggle">
                                     <option value="volvo" id="tc1">Pranjali</option>
                                     <option value="saab" id="tc2">Aashi</option>
                                     <option value="mercedes" id="tc3">Sequence</option>
                                     <option value="audi" id="tc4">UML Graph</option>
-                                </select>
+                                </select></h4>
                             </div>
 
-                            <h2>File Upload:-</h2>
+                            <h4>File Upload:-</h4>
 
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar"></div>
@@ -77,6 +77,12 @@
                             <button class="btn btn-primary" type="button" id="upload-btn">Upload File</button>
                             <input id="upload-input" type="file" name="uploads[]" multiple="multiple" style="display: none" >
                             <p id="showfilename"></p>
+                            <form action="/submit" method="post" enctype="multipart/form-data">
+                                <button class="btn btn-primary">Get Diagram</button>
+                            </form>
+                            <br/>
+                            <p style="color: red"><%=errmsg%></p>
+                            <img src="images/<%=filename%>" class="img-thumbnail" style="visibility:<%=visibility%>"/>
                         </div>
                     </div>
                 </div>
@@ -96,7 +102,7 @@
   <div class="container">
     <section>
       <div class="page-header" id="Grading">
-          <h3>Grading :-</h3>
+          <h4>Grading :-</h4>
         </div><!-- End Page Header -->
 
        
