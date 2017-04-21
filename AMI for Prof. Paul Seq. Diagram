@@ -1,0 +1,9 @@
+Launch Ec2 Instance.
+connect ec2 instance from terminal.
+Install Java 8 - sudo yum install java-1.8.0-openjdk-devel .
+sudo /usr/sbin/alternatives --config java
+choose option 2.
+sudo /usr/sbin/alternatives --config javac
+choose option 1.
+Go to AWS console and right click on ec2 instant and image->create image. 
+Give name and hit create.
