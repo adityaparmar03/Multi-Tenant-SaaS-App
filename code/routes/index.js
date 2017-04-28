@@ -9,7 +9,7 @@ var uploadedfilename="";
 //var datetime = new Date();
 
 
-    router.use(express.static(path.join(__dirname, 'public')));
+
 
 
 
