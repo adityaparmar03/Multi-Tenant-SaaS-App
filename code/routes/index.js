@@ -9,19 +9,23 @@ var uploadedfilename="";
 //var datetime = new Date();
 
 
-    router.use(express.static(path.join(__dirname, 'public')));
 
 
 
-    router.get('/', function(req, res, next) {
+
+router.get('/', function(req, res, next) {
     res.render('index', { filename: '',visibility:'hidden',errmsg:"" });
     //res.sendFile(path.join(__dirname, 'views/index.html'));
-    });
+});
+router.get('/getDiagram', function(req, res, next) {
+    res.render('index', { filename: '',visibility:'hidden',errmsg:"" });
+    //res.sendFile(path.join(__dirname, 'views/index.html'));
+});
 
 
 
 
-    router.post('/upload', function(req, res) {
+router.post('/upload', function(req, res) {
 
         // create an incoming form object
         var form = new formidable.IncomingForm();
@@ -31,7 +35,8 @@ var uploadedfilename="";
         form.multiples = true;
 
         // store all uploads in the /uploads directory
-        form.uploadDir = path.join(__dirname, '/uploads');
+        form.uploadDir = path.join(__dirname, '/ta/uploads');
+        console.log(__dirname)
 
         // every time a file has been uploaded successfully,
         // rename it to it's orignal name
@@ -55,29 +60,31 @@ var uploadedfilename="";
         form.parse(req);
     });
 
-    router.post('/submit',function (req,res,next){
+    router.post('/getDiagram',function (req,res,next){
 
         var filename = uploadedfilename;
 
         if(filename=="")
         {
-            res.render('index', {filename:"",visibility:'hidden',errmsg:"Please upload file."});
-           // res.send(500,'showAlert')
+            // res.send(500,'showAlert')
            // res.redirect(index.ejs);
+
+            res.render('index', {filename:"",visibility:'hidden',errmsg:"Please upload file."});
+
         }
         else {
 
             var fnwe = filename.substring(0, filename.lastIndexOf('.'));
             var pngname = fnwe + ".png";
 
-            exec('/Users/adityaparmar/GitHub/Multi-Tenant-SaaS-App/code/routes/ss.sh /Users/adityaparmar/GitHub/Multi-Tenant-SaaS-App/code/routes/uploads/' + filename + ' ' + filename + ' ' + pngname,
+            exec('ls',
                 function (error, stdout, stderr) {
                     console.log('stdout: ' + stdout);
                     console.log('stderr: ' + stderr);
                     if (error !== null) {
                         console.log('exec error: ' + error);
                     }
-                    res.render('index', {filename:pngname,visibility:'visible',errmsg:"Diagram:"});
+                    res.render('index', {filename:'a.png',visibility:'visible',errmsg:"Diagram:"});
                     uploadedfilename="";
                     filename="";
 

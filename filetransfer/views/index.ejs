@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Multi-tanent SAAS APP</title>
+	<meta name="description" content="Multi-tanent SAAS APP">
+	<!-- Latest compiled and minified CSS -->
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+	<style>
+	body{
+		padding-top: 40px;
+	}
+	</style>
+
+<body data-spy="scroll" data-target="#my-navbar">
+
+  <!-- Navbar -->
+  	<nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
+  		<div class="container">
+  			<div class="navbar-header">
+  				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  				</button>
+
+  				<a href="" class="navbar-brand">ADITYA</a>
+  			</div><!-- Navbar Header-->
+  			<div class="collapse navbar-collapse" id="navbar-collapse">
+  				
+  			<a class="btn btn-warning navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">SIGN IN</a>
+  				<ul class="nav navbar-nav">
+  					<li><a href="">Diagram</a> 
+  					<li><a href="#Grading">Grading</a> 
+  				</ul>
+  			</div>
+  		</div><!-- End Container-->
+  	</nav><!-- End navbar -->
+
+  	
+
+  	
+<!-- Diagram -->
+
+  <div class="container">
+    <section>
+      <div class="page-header" id="Diagram">
+
+          <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div><h4>Choose Tenant :-
+                                <select id="tenant_choice" class="btn btn-primary dropdown-toggle">
+                                    <option value="volvo" id="tc1">Pranjali</option>
+                                    <option value="saab" id="tc2">Aashi</option>
+                                    <option value="mercedes" id="tc3">Sequence</option>
+                                    <option value="audi" id="tc4">UML Graph</option>
+                                </select></h4>
+                            </div>
+
+                            <h4>File Upload:-</h4>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar"></div>
+                            </div>
+                            <button class="btn btn-primary" type="button" id="upload-btn">Upload File</button>
+                            <input id="upload-input" type="file" name="uploads[]" multiple="multiple" style="display: none" >
+                            <p id="showfilename"></p>
+                            <form action="/getDiagram" method="post" enctype="multipart/form-data">
+                                <button class="btn btn-primary">Get Diagram</button>
+                            </form>
+                            <br/>
+                            <p style="color: red"><%=errmsg%></p>
+                            <img src="images/<%=filename%>" class="img-thumbnail" style="visibility:<%=visibility%>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+
+  <!-- End the row -->
+
+<!-- Grading -->
+
+  <div class="container">
+    <section>
+      <div class="page-header" id="Grading">
+          <h4>Grading :-</h4>
+        </div><!-- End Page Header -->
+
+       
+          
+          <div class="col-lg-8">
+            <form action="" class="form-horizontal">
+              <div class="form-group">
+                <label for="user-name" class="col-lg-2 control-label">Score:</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="user-name" placeholder="Please enter score in percentage">
+                </div>
+              </div><!-- End form group -->
+
+           
+
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+
+             
+
+            </form>
+          </div>
+        </div><!-- End the row -->
+
+    </section>
+  </div>
+<!-- SIGN IN Popup -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">LOG IN</h4>
+        </div>
+        <!-- ADD TEXT INPUT AND BUTTON -->
+        <div class="modal-body">
+          
+          <form>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <!--<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>-->
+      </div>
+      
+    </div>
+  </div>
+
+<!-- Footer -->
+
+    <footer>
+      <hr>
+        <div class="container text-center">
+        
+
+        <p>&copy; Copyright @ ADITYA PARMAR</p>
+
+      </div><!-- end Container-->
+      
+
+    </footer>
+ <footer>
+      <hr>
+        <div class="container text-center">
+        
+
+        <p>&copy; Copyright @ ADITYA PARMAR</p>
+
+      </div><!-- end Container-->
+      
+
+    </footer>
+ <footer>
+      <hr>
+        <div class="container text-center">
+        
+
+        <p>&copy; Copyright @ ADITYA PARMAR</p>
+
+      </div><!-- end Container-->
+      
+
+    </footer>
+ <footer>
+      <hr>
+        <div class="container text-center">
+        
+
+        <p>&copy; Copyright @ ADITYA PARMAR</p>
+
+      </div><!-- end Container-->
+      
+
+    </footer>
+ <footer>
+      <hr>
+        <div class="container text-center">
+        
+
+        <p>&copy; Copyright @ ADITYA PARMAR</p>
+
+      </div><!-- end Container-->
+      
+
+    </footer>
+
+    
+
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="javascripts/upload.js"></script>
+
+</body>	
+</html>

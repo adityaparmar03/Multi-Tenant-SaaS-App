@@ -4,7 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>Multi-tanent SAAS APP</title>
-	<meta name="description" content="Multi-tanent SAAS APP">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<meta name="description" content="Multi-tanent SAAS APP">-->
 	<!-- Latest compiled and minified CSS -->
 	 <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -36,7 +37,7 @@
   			</div><!-- Navbar Header-->
   			<div class="collapse navbar-collapse" id="navbar-collapse">
   				
-  			<a class="btn btn-warning navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">SIGN IN</a>
+  			<!--<a class="btn btn-warning navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">SIGN IN</a>-->
   				<ul class="nav navbar-nav">
   					<li><a href="">Diagram</a> 
   					<li><a href="#Grading">Grading</a> 
@@ -46,7 +47,10 @@
   	</nav><!-- End navbar -->
 
   	
+<div style="margin-top: 4%;margin-left: 7%">
+    <p style="color:#ffa11b;font-weight: bold"> Current Selected Tenant is : Class Diagram By Pranjali. To change Tenant <a data-toggle="modal" data-target="#myModal">click here</a>.</p>
 
+</div>
   	
 <!-- Diagram -->
 
@@ -60,14 +64,14 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
 
-                            <div><h4>Choose Tenant :-
+                            <!--<div><h4>Choose Tenant :-
                                 <select id="tenant_choice" class="btn btn-primary dropdown-toggle">
                                     <option value="volvo" id="tc1">Pranjali</option>
                                     <option value="saab" id="tc2">Aashi</option>
                                     <option value="mercedes" id="tc3">Sequence</option>
                                     <option value="audi" id="tc4">UML Graph</option>
                                 </select></h4>
-                            </div>
+                            </div>-->
 
                             <h4>File Upload:-</h4>
 
@@ -77,7 +81,7 @@
                             <button class="btn btn-primary" type="button" id="upload-btn">Upload File</button>
                             <input id="upload-input" type="file" name="uploads[]" multiple="multiple" style="display: none" >
                             <p id="showfilename"></p>
-                            <form action="/submit" method="post" enctype="multipart/form-data">
+                            <form action="/getDiagram" method="post" enctype="multipart/form-data">
                                 <button class="btn btn-primary">Get Diagram</button>
                             </form>
                             <br/>
@@ -141,22 +145,26 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">LOG IN</h4>
+          <h4 class="modal-title">Change Tenant</h4>
         </div>
         <!-- ADD TEXT INPUT AND BUTTON -->
         <div class="modal-body">
           
           <form>
               <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+                  <ul>
+                      <li><a href="ta">Class Diagram by Pranjali</a></li><br>
+                      <li><a href="tb">Class Diagram by Aashi</a></li><br>
+                      <li><a href="tc">Sequence Diagram by Prof. Paul</a></li><br>
+                      <li><a href="td">Uml-graph Diagram by Prof. Paul</a></li><br>
+                  </ul>
+
+
+
+
               </div>
               
-              <button type="submit" class="btn btn-primary">Submit</button>
+
           </form>
         </div>
         <!--<div class="modal-footer">
@@ -169,50 +177,7 @@
 
 <!-- Footer -->
 
-    <footer>
-      <hr>
-        <div class="container text-center">
-        
 
-        <p>&copy; Copyright @ ADITYA PARMAR</p>
-
-      </div><!-- end Container-->
-      
-
-    </footer>
- <footer>
-      <hr>
-        <div class="container text-center">
-        
-
-        <p>&copy; Copyright @ ADITYA PARMAR</p>
-
-      </div><!-- end Container-->
-      
-
-    </footer>
- <footer>
-      <hr>
-        <div class="container text-center">
-        
-
-        <p>&copy; Copyright @ ADITYA PARMAR</p>
-
-      </div><!-- end Container-->
-      
-
-    </footer>
- <footer>
-      <hr>
-        <div class="container text-center">
-        
-
-        <p>&copy; Copyright @ ADITYA PARMAR</p>
-
-      </div><!-- end Container-->
-      
-
-    </footer>
  <footer>
       <hr>
         <div class="container text-center">

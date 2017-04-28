@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Multi-tanent SAAS APP</title>
+	<meta name="description" content="Multi-tanent SAAS APP">
+	<!-- Latest compiled and minified CSS -->
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+	<style>
+	body{
+		padding-top: 10%;
+	}
+	</style>
+
+<body background="/images/bg.jpg" style="opacity:0.86">
+
+<div class="container">
+    <div class="row vertical-offset-200">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sign In</h3>
+                </div>
+                <div class="panel-body">
+                    <form accept-charset="UTF-8" role="form" method="post" action="submit">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Username" name="username" type="text" id="username">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" id="password">
+                            </div>
+
+                            <div class="form-group">
+                            Choose tenant: <select class="form-control" id="tenant" name="tenant">
+                                <option value="ta">Class Diagram by Pranjali </option>
+                                <option value="tb">Class Diagram by Aashi</option>
+                                <option value="tc">Sequence Diagram by Prof. Paul</option>
+                                <option value="td">Uml-Graph by Prof. Paul</option>
+                            </select>
+                            </div>
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login" onclick="check()">
+                            <p style="color: red"><%=error%></p>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="javascripts/upload.js"></script>
+
+
+</body>	
+</html>
