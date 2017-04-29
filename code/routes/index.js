@@ -40,8 +40,8 @@ router.post('/upload', function(req, res) {
         // every time a file has been uploaded successfully,
         // rename it to it's orignal name
         form.on('file', function (field, file) {
-            fs.rename(file.path, path.join(form.uploadDir, datetime + "_" + file.name));
-            uploadedfilename = datetime + "_" + file.name;
+            fs.rename(file.path, path.join(form.uploadDir, file.name));
+            uploadedfilename = file.name;
 
         });
 
@@ -59,7 +59,7 @@ router.post('/upload', function(req, res) {
         form.parse(req);
     });
 
-    router.post('/getDiagram',function (req,res,next){
+    router.post('/tbgetDiagram',function (req,res,next){
 
         var filename = uploadedfilename;
 
