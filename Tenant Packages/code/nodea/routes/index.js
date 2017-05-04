@@ -6,6 +6,8 @@ var formidable = require('formidable');
 var fs = require('fs');
 var exec = require('exec');
 var uploadedfilename="";
+var mysql = require('mysql');
+var pngname="";
 //var datetime = new Date();
 
 
@@ -14,11 +16,11 @@ var uploadedfilename="";
 
 
 router.get('/', function(req, res, next) {
-    res.render('index', { filename: '',visibility:'hidden',errmsg:"" });
+    res.render('index', { filename: '',visibility:'hidden',errmsg:"" ,datacnf:""});
     //res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 router.get('/tagetDiagram', function(req, res, next) {
-    res.render('index', { filename: '',visibility:'hidden',errmsg:"" });
+    res.render('index', { filename: '',visibility:'hidden',errmsg:"" ,datacnf:""});
     //res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
@@ -74,7 +76,7 @@ router.post('/taupload', function(req, res) {
         else {
             var datetime = Date().replace(/\s/g, '').substring(0, 20);
             var foldername = filename.substring(0, filename.lastIndexOf('.'));
-            var pngname ="tenanta.svg";
+            pngname ="tenanta.svg";
 
             var dir = __dirname+"/java/";
             var jar = dir+"UMLParser.jar";
@@ -102,7 +104,7 @@ router.post('/taupload', function(req, res) {
                                 }
 
 
-                                res.render('index', {filename:'/java/'+pngname,visibility:'visible',errmsg:"Diagram:"});
+                                res.render('index', {filename:'/java/'+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:""});
                                 uploadedfilename="";
                                 filename="";
 
@@ -114,6 +116,74 @@ router.post('/taupload', function(req, res) {
         }
 
         });
+
+
+
+
+router.post('/tagetScore',function (req,res,next) {
+
+    var score =( req.body.score).toString();
+    console.log(score);
+    var haserr = 0;
+
+
+    var connection = mysql.createConnection({
+
+        host : 'graderabcd.crcfwhhjhczu.us-west-2.rds.amazonaws.com',
+        user : 'root',
+        password : 'rootroot',
+        database : 'grader'
+
+    });
+    if (score.length == 0)
+    {
+        res.render('index', {filename:"/java/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"Please Enter your comments."});
+
+
+    }
+    else
+    {
+        connection.connect(function (error) {
+            if (!error)
+            {
+                console.log("successfull connection");
+                connection.query("INSERT INTO `grader`.`Tenant_Data` (`tablename`, `column1`) VALUES ('TA','"+score+"');",function (error) {
+                    if (error)
+                    {
+                        console.log("Data not inserted"+error);
+                        haserr = 0;
+                    }
+                    else
+                    {
+                        console.log("Data Successfully inserted ");
+                        haserr = 1 ;
+
+                    }
+
+                });
+
+            }
+            else
+            {
+                console.log("Not Connected");
+                haserr = 0;
+            }
+
+        })
+        if(haserr)
+        {
+            res.render('index', {filename:"/java/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"something went wrong !!"});
+
+        }
+        else
+        {
+            res.render('index', {filename:"/java/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"Tenant is graded successfully."});
+
+        }
+    }
+
+
+});
 
 
 module.exports = router;

@@ -37,10 +37,10 @@
   			</div><!-- Navbar Header-->
   			<div class="collapse navbar-collapse" id="navbar-collapse">
   				
-  			<!--<a class="btn btn-warning navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">SIGN IN</a>-->
+  			<a class="btn btn-link navbar-btn navbar-right" href="/">Logout</a>
   				<ul class="nav navbar-nav">
-  					<li><a href="">Diagram</a> 
-  					<li><a href="#Grading">Grading</a> 
+  					<!--<li><a href="">Diagram</a>
+  					<li><a href="#Grading">Grading</a>-->
   				</ul>
   			</div>
   		</div><!-- End Container-->
@@ -61,27 +61,18 @@
           <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">File Upload</div>
                         <div class="panel-body">
-
-                            <!--<div><h4>Choose Tenant :-
-                                <select id="tenant_choice" class="btn btn-primary dropdown-toggle">
-                                    <option value="volvo" id="tc1">Pranjali</option>
-                                    <option value="saab" id="tc2">Aashi</option>
-                                    <option value="mercedes" id="tc3">Sequence</option>
-                                    <option value="audi" id="tc4">UML Graph</option>
-                                </select></h4>
-                            </div>-->
-
-                            <h4>File Upload:-</h4>
 
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar"></div>
                             </div>
-                            <button class="btn btn-primary" type="button" id="upload-btn">Upload File</button>
-                            <input id="upload-input" type="file" name="uploads[]" multiple="multiple" style="display: none" >
-                            <p id="showfilename"></p>
+
                             <form action="tagetDiagram" method="post" enctype="multipart/form-data">
+                                <button class="btn btn-success" type="button" id="upload-btn">Upload File  </button>
+                                <input id="upload-input" type="file" name="uploads[]" multiple="multiple" style="display: none" >
+
                                 <button class="btn btn-primary">Get Diagram</button>
                             </form>
                             <br/>
@@ -103,38 +94,46 @@
 
 <!-- Grading -->
 
-  <div class="container">
-    <section>
-      <div class="page-header" id="Grading">
-          <h4>Grading :-</h4>
-        </div><!-- End Page Header -->
+  <div class="container" style="margin-left: 5%">
+      <div class="row">
+          <div class="col-xs-12">
+              <div class="panel panel-warning">
+                  <div class="panel-heading">Grading</div>
+                  <div class="panel-body">
+                      <section>
 
-       
-          
-          <div class="col-lg-8">
-            <form action="" class="form-horizontal">
-              <div class="form-group">
-                <label for="user-name" class="col-lg-2 control-label">Score:</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" id="user-name" placeholder="Please enter score in percentage">
-                </div>
-              </div><!-- End form group -->
 
-           
 
-              <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                          <div class="col-lg-8">
+                              <form action="tagetScore" method="post" class="form-horizontal">
+
+                                  <div class="form-group" >
+
+                                      <div class="col-lg-10">
+                                          <b>Scale:</b>
+                                          <input name="score" type="range" min="0" max="10" />
+                                      </div>
+                                  </div>
+
+
+
+                                  <div class="form-group">
+                                      <div class="col-lg-10">
+                                          <button class="btn btn-primary">Submit</button>
+                                          <p style="color: forestgreen"><%=datacnf%></p>
+                                      </div>
+
+                                  </div>
+
+
+                              </form>
+
+                          </div><!-- End the row -->
+                      </section>
+                  </div>
               </div>
-
-             
-
-            </form>
           </div>
-        </div><!-- End the row -->
-
-    </section>
+      </div>
   </div>
 <!-- SIGN IN Popup -->
 <!-- Modal -->
