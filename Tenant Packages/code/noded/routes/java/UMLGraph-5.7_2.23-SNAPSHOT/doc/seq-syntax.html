@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Syntax of Sequence Diagram Definitions</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./seq-intro.html" />
+<link rel="next" href="./seq-simple.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Syntax of Sequence Diagram Definitions</h1>
+Sequence diagrams consist of objects, their lifelines
+(also known as smimming lanes),
+and the exchanged messages.
+Sequence diagrams are defined in UMLGraph using the <em>pic</em>
+syntax.
+<p />
+A sequence diagram file must start with the sequence:
+<div class="code">
+
+<font face="monospace">
+.PS<br>
+<br>
+copy &quot;sequence.pic&quot;;<br>
+</font>
+
+</div>
+The <code>.PS</code> marks the beginning of <em>pic</em> commands.
+The sequence
+<code>copy "sequence.pic";</code>
+loads the macros defining the sequence diagram operations.
+The file <code>sequence.pic</code>, part of the UMLGraph distribution,
+must exist in the directory where <em>pic2plot</em> will be executed.
+<p />
+Sequence diagram files must end with the sequence:
+<div class="code">
+
+<font face="monospace">
+.PE<br>
+</font>
+
+</div>
+<p />
+The sequence diagrams are defined by calling function-like <em>pic</em>
+macros.
+Each function call is terminated with a semicolon.
+Space is not significant between macro calls; on the other hand
+adding a space character between a macro's arguments can lead
+to surprises and should be avoided.
+Objects are referenced using variable-like alphanumeric identifiers.
+Strings are enclosed in double quotes.
+<p />
+As an example, the following defines an object <code>O</code>
+that will be identified in the diagram as
+<code>o:Toolkit</code>
+<div class="code">
+
+<font face="monospace">
+object(O,&quot;o:Toolkit&quot;);<br>
+</font>
+
+</div>
+<p />
+Comments start with a <code>#</code> character.
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff"># This is a comment</font><br>
+</font>
+
+</div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./seq-intro.html" id="previous"><strong>Previous</strong>Sequence Diagrams</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./seq-simple.html" id="next"><strong>Next</strong>Defining a Simple Sequence Diagram</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

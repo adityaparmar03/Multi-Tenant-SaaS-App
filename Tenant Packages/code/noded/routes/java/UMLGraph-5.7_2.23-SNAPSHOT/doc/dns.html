@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Sequence Diagram Example: A DNS Query</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./uml-71.html" />
+<link rel="next" href="./gui-db.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Sequence Diagram Example: A DNS Query</h1>
+The following diagram, illustrates the operating system calls of
+a typical DNS query.
+It will appear in the book
+<a href="http://www.spinellis.gr/codequality">Code Quality: The Open Source Perspective</a> (Addison-Wesley 2006).
+The diagram was the original motivation behind the UMLGraph sequence diagram
+drawing facility.
+<h2>Diagram</h2>
+<img src="dnsq.gif" alt="DNS Query Messages" />
+<h2>Diagram Source Code</h2>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff">#/usr/bin/pic2plot -Tps</font><br>
+<font color="#0000ff">#</font><br>
+<font color="#0000ff"># Run as pic filename | groff | ps2eps</font><br>
+<font color="#0000ff">#</font><br>
+<font color="#0000ff"># DNS query collaboration diagram</font><br>
+<font color="#0000ff">#</font><br>
+<font color="#0000ff">#</font><br>
+<br>
+.PS<br>
+<br>
+copy&nbsp;<font color="#ff00ff">&quot;sequence.pic&quot;</font>;<br>
+<br>
+boxwid = 1.3;<br>
+<br>
+<font color="#0000ff"># Define the objects</font><br>
+object(B,<font color="#ff00ff">&quot;:Web Browser&quot;</font>);<br>
+object(W,<font color="#ff00ff">&quot;:Workstation Kernel&quot;</font>);<br>
+object(S,<font color="#ff00ff">&quot;:Server Kernel&quot;</font>);<br>
+object(D,<font color="#ff00ff">&quot;:DNS Server&quot;</font>);<br>
+step();<br>
+<br>
+<font color="#0000ff"># Message sequences</font><br>
+active(B);<br>
+active(D);<br>
+active(W);<br>
+active(S);<br>
+message(D,S,<font color="#ff00ff">&quot;select&quot;</font>);<br>
+inactive(D);<br>
+message(B,W,<font color="#ff00ff">&quot;socket&quot;</font>);<br>
+message(B,W,<font color="#ff00ff">&quot;connect&quot;</font>);<br>
+message(B,W,<font color="#ff00ff">&quot;sendto&quot;</font>);<br>
+message(W,W,<font color="#ff00ff">&quot;send packet&quot;</font>);<br>
+message(W,S,<font color="#ff00ff">&quot;DNS A query&quot;</font>);<br>
+message(B,W,<font color="#ff00ff">&quot;recvfrom&quot;</font>);<br>
+inactive(B);<br>
+message(S,S,<font color="#ff00ff">&quot;receive packet&quot;</font>);<br>
+rmessage(S,D,<font color="#ff00ff">&quot;select returns&quot;</font>);<br>
+active(D);<br>
+message(D,S,<font color="#ff00ff">&quot;recvfrom&quot;</font>);<br>
+message(D,S,<font color="#ff00ff">&quot;sendto&quot;</font>);<br>
+message(S,S,<font color="#ff00ff">&quot;send packet&quot;</font>);<br>
+message(S,W,<font color="#ff00ff">&quot;DNS A reply&quot;</font>);<br>
+message(W,W,<font color="#ff00ff">&quot;receive packet&quot;</font>);<br>
+rmessage(W,B,<font color="#ff00ff">&quot;recvfrom returns&quot;</font>);<br>
+active(B);<br>
+message(B,W,<font color="#ff00ff">&quot;close&quot;</font>);<br>
+<br>
+complete(B);<br>
+complete(W);<br>
+complete(S);<br>
+complete(D);<br>
+<br>
+.PE<br>
+</font>
+
+</div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./uml-71.html" id="previous"><strong>Previous</strong>Sequence Diagram Example: External Actor</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./gui-db.html" id="next"><strong>Next</strong>Sequence Diagram Example: A Comments and Frames</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

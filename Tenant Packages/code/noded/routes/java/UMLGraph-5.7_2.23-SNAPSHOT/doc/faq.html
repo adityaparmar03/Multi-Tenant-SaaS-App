@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Frequently Asked Questions</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./gui-db.html" />
+<link rel="next" href="./bib.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Frequently Asked Questions</h1>
+
+<!--
+To update the table of contents execute the following vim command from a register
+/^<h2>Contentsjjma/ul>kmb/^$"qyy:g/^<h2><a name/s,<h2><a name="\([^>]*\)>\(.*\)</a></h2>,<li> <a href="\#\1>\2</a></li>,|y Q|u'ad'b"qP
+-->
+
+<h2>Contents</h2>
+<ul>
+
+<li> <a href="#cmdline">What is the command line sequence to generate a UMLGraph class diagram?</a></li>
+<li> <a href="#utfsvg">Why are the SVG diagrams dot generates malformed?</a></li>
+<li> <a href="#antialias">How can I improve the quality of the bitmap images I generate?</a></li>
+<li> <a href="#layout">How can I improve the layout of my class diagrams?</a></li>
+<li> <a href="#mclass">A class appears multiple times in a class diagram.  Why?</a></li>
+<li> <a href="#static">Shouldn't static fields appear underlined?</a></li>
+<li> <a href="#winpic">Where can I find a <em>pic2plot</em> executable for Windows?</a></li>
+<li> <a href="#cr">Under Windows the output of <em>pic2plot</em> appears empty.  Why?</a></li>
+<li> <a href="#maven">I have a problem with Maven's Dotuml plugin.  Can you help me?</a></li>
+<li> <a href="#autopic">How can I make the UMLGraph doclet generate sequence diagrams?</a></li>
+<li> <a href="#unnamed">Why do the options specified in the <code>UMLOptions</code> class stop working, when I pass the <code>packagenames</code> option to <em>javadoc</em>?</a></li>
+<li> <a href="#tiger">Why doesn't UMLGraph run under Mac OS X?</a></li>
+<li> <a href="#cpp">Can I create UML class diagrams from C++ code?</a></li>
+<li> <a href="#ClassCastException">How can I get around a UMLGraphDoc crash with a ClassCastException?</a></li>
+<li> <a href="#license">Under what license is UMLGraph distributed?</a></li>
+<li> <a href="#classnotfound">Why do I get an exception java.lang.NoClassDefFoundError: com/sun/tools/javadoc/Main?</a></li>
+<li> <a href="#truncxml">How can I prevent clipped SVG images in sequence diagrams?</a></li>
+<li> <a href="#private">How can I instruct UMLGraph to include private fields in its output?</a></li>
+</ul>
+
+<h2><a name="cmdline">What is the command line sequence to generate a UMLGraph class diagram?</a></h2>
+Assuming that you diagram's description is in the file Diag.java,
+issue the command:
+<div class="code">
+
+<font face="monospace">
+umlgraph Diag png<br>
+java&nbsp;<font color="#6a5acd">-jar</font>&nbsp;path-to/UmlGraph.jar&nbsp;<font color="#6a5acd">-package</font>&nbsp;<font color="#6a5acd">-output</font>&nbsp;- Diag.java | dot&nbsp;<font color="#6a5acd">-Tpng</font>&nbsp;<font color="#6a5acd">-oDiag</font>.png Diag.dot<br>
+</font>
+
+</div>
+In the above you can change <code>png</code> to another file format,
+and add more UMLGraph switches at the end of the line.
+<p />
+
+
+<h2><a name="utfsvg">Why are the SVG diagrams dot generates malformed?</a></h2>
+UMLGraph uses guillemot characters for representing the angle brackets around
+stereotypes, as in &#171;interface&#187;.
+By default these are encoded as ISO-8859-1 characters, which are illegal
+in the UTF-8 output that dot generates for SVG.
+When using dot to generate SVG output, you should also specify
+<code>-outputencoding utf8</code> to UMLGraph.
+
+<h2><a name="antialias">How can I improve the quality of the bitmap images I generate?</a></h2>
+
+Both
+<em>dot</em> and
+<em>pic2plot</em> can directly produce bitmap images in
+formats like GIF, PNG and PNM.
+However, if you want to produce presentation-quality output
+the a vector output format like Postscript or SVG is preferable.
+If you do require a bitmap format, it might be worth to create
+it at a higher resolution from a Postscript image, and then downsample it.
+This procedure (used for the diagrams appearing on the UMLGraph web site)
+will create an antialiased image of a higher quality than what the default
+bitmap output options produce.
+The following pipeline is an example of how you can achieve this
+effect:
+<div class="code">
+
+<font face="monospace">
+dot&nbsp;<font color="#6a5acd">-Tps</font>&nbsp;FILENAME.dot |<br>
+gs&nbsp;<font color="#6a5acd">-q</font>&nbsp;<font color="#6a5acd">-r360</font>&nbsp;<font color="#6a5acd">-dNOPAUSE</font>&nbsp;<font color="#6a5acd">-sDEVICE</font><font color="#804040"><b>=</b></font>pnm&nbsp;<font color="#6a5acd">-sOutputFile</font><font color="#804040"><b>=</b></font>-&nbsp;&nbsp;-&nbsp;<font color="#6a5acd">-c</font>&nbsp;quit |<br>
+pnmcrop |<br>
+pnmscale&nbsp;<font color="#ff00ff">0</font>.<font color="#ff00ff">25</font>&nbsp;|<br>
+ppmtogif&nbsp;<font color="#804040"><b>&gt;</b></font>FILENAME.gif<br>
+</font>
+
+</div>
+(David Griffiths reports that he had to add to the <em>gs</em> command
+<code>-sPAPERSIZE=a4</code> or
+<code>-dDEVICEHEIGHTPOINTS=1000</code> to avoid getting
+his results chopped-off.)
+
+<p />
+One other possibility for converting the sequence diagram into Postscript
+is to pass it through <em>pic</em> and <em>groff</em>.
+Tools like <em>ps2epsi</em> and <em>ps2eps</em> can then be used to
+convert the Postscript into encapsulated Postscript.
+Of course, <em>groff</em> users will just use the <em>pic</em>
+program as part of their processing pipeline.
+
+<h2><a name="layout">How can I improve the layout of my class diagrams?</a></h2>
+Try manipulating the <em>dot</em> parameters ratio, minlen, ranksep, and
+nodesep.
+For example, Arnaud Rogues recommends running <em>dot</em> with
+command-line arguments as follows.
+<div class="code">
+
+<font face="monospace">
+dot&nbsp;<font color="#6a5acd">-Gratio</font><font color="#804040"><b>=</b></font><font color="#ff00ff">0</font>.<font color="#ff00ff">7</font>&nbsp;<font color="#6a5acd">-Eminlen</font><font color="#804040"><b>=</b></font><font color="#ff00ff">2</font><br>
+</font>
+
+</div>
+
+<h2><a name="mclass">A class appears multiple times in a class diagram.  Why?</a></h2>
+Most probably your class diagram uses packages, and you are not
+qualifying the classes with the respective package names in the
+tags you use.
+The tags are not smart enough to do the package resolution,
+so you will have to prepend the package name to the class,
+or avoid using packages.
+<p />
+<h3>Problematic Specification</h3>
+<div class="code">
+
+<font face="monospace">
+<font color="#a020f0">package</font>&nbsp;test;<br>
+<font color="#2e8b57"><b>abstract</b></font>&nbsp;<font color="#2e8b57"><b>class</b></font>&nbsp;AbstractNode {}<br>
+<font color="#0000ff">/** @composed 1 has * AbstractNode */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;InnerNode&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractNode {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Leaf&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractNode {}<br>
+</font>
+
+</div>
+<h3>First Approach: Class Name Qualified with the Package</h3>
+<div class="code">
+
+<font face="monospace">
+<font color="#a020f0">package</font>&nbsp;test;<br>
+<font color="#2e8b57"><b>abstract</b></font>&nbsp;<font color="#2e8b57"><b>class</b></font>&nbsp;AbstractNode {}<br>
+<font color="#0000ff">/** @composed 1 has * test.AbstractNode */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;InnerNode&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractNode {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Leaf&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractNode {}<br>
+</font>
+
+</div>
+<h3>Second Approach: No Package Specification</h3>
+<div class="code">
+
+<font face="monospace">
+<font color="#2e8b57"><b>abstract</b></font>&nbsp;<font color="#2e8b57"><b>class</b></font>&nbsp;AbstractNode {}<br>
+<font color="#0000ff">/** @composed 1 has * test.AbstractNode */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;InnerNode&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractNode {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Leaf&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractNode {}<br>
+</font>
+
+</div>
+
+<h2><a name="static">Shouldn't static fields appear underlined?</a></h2>
+Yes they should.
+Unfortunately, <em>dot</em> does not (yet) support a way to underline
+single labels, and thus <em>UMLGraph</em> can not show the static fields
+underlined.
+
+
+<h2><a name="winpic">Where can I find a <em>pic2plot</em> executable for Windows?</a></h2>
+A port of <em>pic2plot</em> for Windows can be found in
+GNU PlotUtils, which is part of the
+<a href="http://gnuwin32.sourceforge.net/packages.html">GnuWin32</a>
+project.
+
+<h2><a name="cr">Under Windows the output of <em>pic2plot</em> appears empty.  Why?</a></h2>
+On Windows platforms note that the current version of
+<em>pic2plot</em> appears to be very picky about carriage return (CR - \r)
+characters (by default, CR is part of the platform's end of line sequence)
+appearing in its input file.
+Therefore, you will probably want to instruct your editor to create
+Unix-style files, or filter the files to remove the carriage return
+characters.
+The following Perl invocation is such a filter:
+<div class="code">
+
+<font face="monospace">
+perl&nbsp;<font color="#6a5acd">-p</font>&nbsp;<font color="#6a5acd">-e</font>&nbsp;<font color="#804040"><b>&quot;</b></font><font color="#ff00ff">BEGIN {binmode(STDOUT);} s/</font><font color="#6a5acd">\r</font><font color="#ff00ff">//</font><font color="#804040"><b>&quot;</b></font><br>
+</font>
+
+</div>
+In addition, <em>pic2plot</em> appears to require that the last input file
+be properly terminated (with a newline).
+Apparently, some Windows editors may leave the last line unterminated,
+so if your editor is in this category it may be safer to add a blank line
+in the end.
+
+<h2><a name="maven">I have a problem with Maven's Dotuml plugin.  Can you help me?</a></h2>
+Sorry, I did not develop this plugin, and therefore can not offer help.
+Have a look at the project's documentation and mailing lists available through
+<a href="http://maven-plugins.sourceforge.net/maven-dotuml-plugin/">plugin web page</a>.
+
+<h2><a name="autopic">How can I make the UMLGraph doclet generate sequence diagrams?</a></h2>
+You can't.
+You have to write the <em>pic</em> code for the sequence diagrams by hand.
+
+<h2><a name="unnamed">Why do the options specified in the <code>UMLOptions</code> class stop working, when I pass the <code>packagenames</code> option to <em>javadoc</em>?</a></h2>
+When you pass the <code>packagenames</code> option to
+<em>javadoc</em>, the default (unnamed) package (and the
+<code>UMLOptions</code> class
+located in it) is ignored.
+In such cases you should include the <code>UMLOptions</code> class
+within a named package.
+
+<h2><a name="tiger">Why doesn't UMLGraph run under Mac OS X?</a></h2>
+Make sure you are running Java 1.5 (run <code>java -version</code> to see).
+If you are not running 1.5 you may need to adjust the symbolic links
+in
+<code>/System/Library/Frameworks/JavaVM.framework/Versions</code>.
+
+<h2><a name="cpp">Can I create UML class diagrams from C++ code?</a></h2>
+This <a href="http://www.spinellis.gr/blog/20060921/">blog entry</a> describes
+a simple solution that has worked for me.
+Depending on your requirements YMMV.
+
+<h2><a name="ClassCastException">How can I get around a UMLGraphDoc crash with a ClassCastException?</a></h2>
+This happens due to a know <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6442982">javadoc bug</a>.
+By fixing the classpath used for the UNLGraph invocation you can avoid this
+problem.
+Olivier Duysens notes:
+<blockquote>
+<p>
+JBuilder users need to go to Preferences/Build/Ant,
+and tick the box "Use project libraries when running ant" to solve the issue.
+</p>
+</blockquote>
+
+<h2><a name="license">Under what license is UMLGraph distributed?</a></h2>
+UMLGraph is distributed under the
+<a href="http://www.opensource.org/licenses/bsd-license.html">BSD license</a>
+(see the file LICENSE in the distribution).
+For uniformity with the rest of the web content appearing on this site,
+the web site of UMLGraph appears under a
+<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative Commons Attribution-NonCommercial-NoDerivs 2.5</a>
+license.
+This affects only the UMLGraph home page; all other material
+(for example the documentation) is also part of the UMLGraph distribution,
+and can therefore be used under the BSD license.
+
+<h2><a name="classnotfound">Why do I get an exception java.lang.NoClassDefFoundError: com/sun/tools/javadoc/Main?</a></h2>
+This exception will occur when you execute UMLGraph directly as a jar
+(not through<em>javadoc</em>), and the files UmlGraph.jar and tools.jar
+are not in the same directory.
+Either copy UmlGraph.jar in the directory where the tools.jar
+of the JDK distribution is located (and execute UmlGraph.jar from there),
+or copy tools.jar to the directory where UmlGraph.jar is located.
+(The file tools.jar is typically located in the lib directory
+of your JDK distribution.)
+
+<h2><a name="truncxml">How can I prevent clipped SVG images in sequence diagrams?</a></h2>
+This appears to be a limitation of <em>pic2plot</em>.
+You can work around it, by increasing the width and height values appearing
+in the SVG XML file that <em>pic2plot</em> generates.
+<h2><a name="private">How can I instruct UMLGraph to include private fields in its output?</a></h2>
+You need to pass the <code>-private</code> flag to <em>javadoc</em>.
+Note that
+when processing code that includes annotations
+defined by libraries outside the core J2SE distribution,
+it is a good idea to include the library jars to the classpath.
+Otherwise, <em>javadoc</em> (and concequently UMLGraph)
+will fail to process the input classes correctly.
+This is <a href="http://forums.oracle.com/forums/thread.jspa?threadID=1521148">a known issue</a> with <em>javadoc</em>,
+but only manifests in certain occasions when running UMLGraph,
+for example when processing private class fields.
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./gui-db.html" id="previous"><strong>Previous</strong>Sequence Diagram Example: A Comments and Frames</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./bib.html" id="next"><strong>Next</strong>Bibliography</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

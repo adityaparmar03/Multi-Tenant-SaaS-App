@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Multi-tanent SAAS APP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<meta name="description" content="Multi-tanent SAAS APP">-->
+	<!-- Latest compiled and minified CSS -->
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+	<style>
+	body{
+		padding-top: 40px;
+	}
+	</style>
+
+<body data-spy="scroll" data-target="#my-navbar">
+
+  <!-- Navbar -->
+  	<nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
+  		<div class="container">
+  			<div class="navbar-header">
+  				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  				</button>
+
+  				<a href="" class="navbar-brand">ADITYA</a>
+  			</div><!-- Navbar Header-->
+  			<div class="collapse navbar-collapse" id="navbar-collapse">
+  				
+  			<!--<a class="btn btn-warning navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">SIGN IN</a>-->
+  				<ul class="nav navbar-nav">
+  					<li><a href="">Diagram</a> 
+  					<li><a href="#Grading">Grading</a> 
+  				</ul>
+  			</div>
+  		</div><!-- End Container-->
+  	</nav><!-- End navbar -->
+
+  	
+<div style="margin-top: 4%;margin-left: 7%">
+    <p style="color:#ffa11b"> Current Selected Tenant is : <u><b>UML-GRAPH By Prof. Paul.</b></u> To change Tenant <a data-toggle="modal" data-target="#myModal">click here</a>.</p>
+
+</div>
+  	
+<!-- Diagram -->
+
+  <div class="container">
+    <section>
+      <div class="page-header" id="Diagram">
+
+          <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+                            <h4>Enter your code:</h4>
+
+
+
+
+                            <form action="tdgetDiagram" method="post"  class="form-group">
+                                <textarea name="txtcode" rows="10"   class="form-control" ></textarea>
+                                <br/>
+                            <button class="btn btn-primary">Get Diagram</button>
+                            </form>
+                            <br/>
+                            <p style="color: #ffa11b"><%=errmsg%></p>
+                            <img src="<%=filename%>" class="img-thumbnail" style="visibility:<%=visibility%>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+
+  <!-- End the row -->
+
+<!-- Grading -->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-12">
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                        <section>
+                          <div class="page-header" id="Grading">
+                              <h4>Grading :</h4>
+                            </div><!-- End Page Header -->
+
+
+
+                              <div class="col-lg-8">
+                                <form action="tdgetScore" method="post" class="form-horizontal">
+
+                                  <div class="form-group" >
+                                    <label for="user-name" class="col-lg-2 control-label">Comments:</label>
+                                    <div class="col-lg-10">
+                                        <textarea  rows="2"   class="form-control" name="score" maxlength="40"></textarea>
+                                    </div>
+                                  </div>
+
+
+
+                                  <div class="form-group">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                      <button class="btn btn-primary">Submit</button>
+                                    </div>
+                                  </div>
+                                  <p style="color:#ffa11b"><%=datacnf%></p>
+
+
+                                </form>
+
+                                </div><!-- End the row -->
+                        </section>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<!-- SIGN IN Popup -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Change Tenant</h4>
+        </div>
+        <!-- ADD TEXT INPUT AND BUTTON -->
+        <div class="modal-body">
+          
+          <form>
+              <div class="form-group">
+                  <ul>
+                      <li><a href="/ta/">Class Diagram by Pranjali</a></li><br>
+                      <li><a href="/tb/">Class Diagram by Aashi</a></li><br>
+                      <li><a href="/tc/">Sequence Diagram by Prof. Paul</a></li><br>
+                      <li><a href="/td/">Uml-graph Diagram by Prof. Paul</a></li><br>
+                  </ul>
+
+
+
+
+              </div>
+              
+
+          </form>
+        </div>
+        <!--<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>-->
+      </div>
+      
+    </div>
+  </div>
+
+<!-- Footer -->
+
+
+     <footer>
+          <hr>
+            <div class="container text-center">
+
+
+            <p>&copy; Copyright @ ADITYA PARMAR</p>
+
+          </div><!-- end Container-->
+
+
+     </footer>
+
+    
+
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+</body>	
+</html>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Sequence Diagram Example: Concurrent Processes and Activations</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./uml-appa.html" />
+<link rel="next" href="./uml-182.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Sequence Diagram Example: Concurrent Processes and Activations</h1>
+The following diagram, based on the diagram appearing on p. 70 of
+UML Distilled, contains self calls, object activation,
+self-deleted objects, and asynchronous messages.
+<h2>Diagram</h2>
+<img src="dist-52.gif" alt="UML Distilled: Concurrent processes and activations" />
+<h2>Diagram Source Code</h2>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff"># UML Distilled: Figure 5-2 p. 70</font><br>
+<br>
+.PS<br>
+<br>
+copy&nbsp;<font color="#ff00ff">&quot;sequence.pic&quot;</font>;<br>
+<br>
+boxwid = 1.3;<br>
+<br>
+<font color="#0000ff"># Define the objects</font><br>
+pobject(X);<br>
+pobject(T);<br>
+pobject(C);<br>
+pobject(A1);<br>
+pobject(A2);<br>
+<br>
+<font color="#0000ff"># Message sequences</font><br>
+cmessage(X,T,<font color="#ff00ff">&quot;a: Transaction&quot;</font>);<br>
+active(T);<br>
+async();<br>
+cmessage(T,C,<font color="#ff00ff">&quot;a: TransCoord&quot;</font>);<br>
+inactive(T);<br>
+active(C);<br>
+cmessage(C,A1,<font color="#ff00ff">&quot;a1: TransCheck&quot;</font>);<br>
+active(A1);<br>
+cmessage(C,A2,<font color="#ff00ff">&quot;a2: TransCheck&quot;</font>);<br>
+active(A2);<br>
+message(A1,C,<font color="#ff00ff">&quot;ok&quot;</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sync();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active(C);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message(C,C,<font color="#ff00ff">&quot;all done?&quot;</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inactive(C);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;async();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step();<br>
+delete(A1);<br>
+inactive(C);<br>
+step();<br>
+message(A2,C,<font color="#ff00ff">&quot;ok&quot;</font>);<br>
+active(C);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sync();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active(C);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message(C,C,<font color="#ff00ff">&quot;all done?&quot;</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inactive(C);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;async();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step();<br>
+delete(A2);<br>
+message(C,T,<font color="#ff00ff">&quot;beValid&quot;</font>);<br>
+inactive(C);<br>
+active(T);<br>
+step();<br>
+<br>
+complete(T);<br>
+complete(C);<br>
+<br>
+.PE<br>
+</font>
+
+</div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./uml-appa.html" id="previous"><strong>Previous</strong>Sequence Diagram Example: Nested Activation and Complex Interactions</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./uml-182.html" id="next"><strong>Next</strong>Sequence Diagram Example: Create and Destroy</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

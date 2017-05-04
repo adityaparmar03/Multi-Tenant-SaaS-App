@@ -1,0 +1,22 @@
+/*
+ * CSS for printing the complete table of contents.
+ *
+ * $Id: toc-print.css,v 1.1 2011/03/01 21:47:49 dds Exp $
+ */
+
+/* Don't show links */
+a {
+	color: black;
+	text-decoration: none;
+}
+
+ul { counter-reset: item }
+li { display: block }
+li:before { counter-increment: item; content: counters(item, ".") ". "; }
+
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+.code { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }

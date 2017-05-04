@@ -1,0 +1,51 @@
+/*
+ * CSS for printing the complete set of notes as a book.
+ *
+ * $Id: whole-print.css,v 1.1 2011/03/01 21:47:49 dds Exp $
+ */
+
+p.footer {font-size: 70%}
+pre {
+	padding:4px;
+	background-color: #eeeeee !important;
+	border: 1px solid #000080;
+}
+.code { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+a {
+	color: black;		/* Don't show visited links */
+	text-decoration: none;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 10ex;
+	font-size: 35pt;
+	margin-bottom: 15ex;
+	background-color: white;
+	border-left: 0px none white;
+	padding: 0px 0px 0px 0px;
+}
+h2 {
+	font-size: 25pt;
+	margin-bottom: 8ex;
+	counter-reset: section;      /* Set section to 0 */
+	page-break-before:always;
+}
+h2:before {
+    padding-left: 87%;
+    border-bottom: 5px solid black;
+    font-size: 60pt;
+    content: counter(chapter) "\a";
+    line-height: 120pt;
+    white-space: pre-line;
+    counter-increment: chapter;  /* Add 1 to chapter */
+}
+h3:before {
+    content: counter(chapter) "." counter(section) " ";
+    counter-increment: section;
+}
+hr { height: 1px; margin-top:1em; }
+body {
+    counter-reset: chapter;      /* Create a chapter counter scope */
+}

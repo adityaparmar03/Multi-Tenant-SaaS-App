@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Defining a Simple Sequence Diagram</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./seq-syntax.html" />
+<link rel="next" href="./seq-impr.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Defining a Simple Sequence Diagram</h1>
+A sequence diagram is defined in three main phases:
+<ol>
+<li> Object definition </li>
+<li> Message exchange </li>
+<li> Object lifeline completion</li>
+</ol>
+The following is an example of a very simple UMLGraph
+sequence diagram
+(from now on we will ommit the <code>.PS/.PE</code> and
+<code>copy "sequence.pic";</code>
+elements.)
+<div class="code">
+
+<font face="monospace">
+.PS<br>
+copy&nbsp;<font color="#ff00ff">&quot;sequence.pic&quot;</font>;<br>
+<br>
+<font color="#0000ff"># Object definition</font><br>
+object(S,<font color="#ff00ff">&quot;s:Switch&quot;</font>);<br>
+object(P,<font color="#ff00ff">&quot;p:Pump&quot;</font>);<br>
+<br>
+<font color="#0000ff"># Message exchange</font><br>
+message(S,P,<font color="#ff00ff">&quot;run()&quot;</font>);<br>
+message(S,P,<font color="#ff00ff">&quot;stop()&quot;</font>);<br>
+<br>
+<font color="#0000ff"># Object lifeline completion</font><br>
+complete(S);<br>
+complete(P);<br>
+<br>
+.PE<br>
+</font>
+
+</div>
+The above code, defines two objects, S and P,
+labeled as "s:Switch" and "p:Pump".
+Objects are placed in the diagram from left to right, in the
+order they are defined.
+All defined objects are initially inactive.
+<p />
+The code then sends a messages from S to P labeled "run()",
+and another one labeled "stop()".
+Each message automatically advances the sequence diagram timeline by a
+single step.
+<p />
+Finally, the code completes the lifelines of the two objects.
+<p />
+The resultant diagram is<br />
+<img src="seq-simple.gif" alt="Simple sequence diagram" />
+<p />
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./seq-syntax.html" id="previous"><strong>Previous</strong>Syntax of Sequence Diagram Definitions</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./seq-impr.html" id="next"><strong>Next</strong>An Improved Sequence Diagram</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

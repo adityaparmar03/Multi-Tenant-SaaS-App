@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagrams</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./install.html" />
+<link rel="next" href="./cd-oper.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagrams</h1>
+One specifies a class diagram using the Java syntax complemented by
+<a href="http://java.sun.com/j2se/javadoc/"><em>javadoc</em></a>
+tags.
+Running the UmlGraph doclet on the specification will generate
+a
+<a href="http://www.graphviz.org/">Graphviz</a>
+diagram specification that can be automatically processed to
+create PNG, SVG, EMF, Postscript, GIF, JPEG, fig, or Framemaker drawings.
+<p />
+The following is an example of a specification and the resulting UML class
+diagram:
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#2e8b57"><b>class</b></font>&nbsp;Person {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String Name;<br>
+}<br>
+<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Employee&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Person {}<br>
+<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Client&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Person {}<br>
+</font>
+
+</div>
+</td><td>
+<img src="class-eg.gif" alt="Simple UML class diagram" />
+</td></tr></table>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./install.html" id="previous"><strong>Previous</strong>Installation</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./cd-oper.html" id="next"><strong>Next</strong>Class Diagram Operations</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Monday, October 5, 2015 2:24 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

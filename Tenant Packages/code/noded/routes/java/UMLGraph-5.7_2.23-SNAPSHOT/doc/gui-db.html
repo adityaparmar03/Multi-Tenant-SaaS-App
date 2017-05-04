@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Sequence Diagram Example: A Comments and Frames</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./dns.html" />
+<link rel="next" href="./faq.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Sequence Diagram Example: A Comments and Frames</h1>
+The following sequence diagram demonstrates the use of the frame and comment elements.
+<h2>Diagram</h2>
+<img src="GUI-DB.gif" alt="Database GUI interface" />
+<h2>Diagram Source Code</h2>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff"># usage-example for the comment extensions to the</font><br>
+<font color="#0000ff"># Written by Sebastian Setzer</font><br>
+<br>
+.PS<br>
+copy&nbsp;<font color="#ff00ff">&quot;sequence.pic&quot;</font>;<br>
+<br>
+<font color="#0000ff"># Define the objects</font><br>
+actor(U,&nbsp;<font color="#ff00ff">&quot;&quot;</font>);<br>
+object(G,<font color="#ff00ff">&quot;g:GUI&quot;</font>);<br>
+placeholder_object(Dummy1);&nbsp;<font color="#0000ff"># more space</font><br>
+placeholder_object(D);<br>
+step();<br>
+<br>
+<font color="#0000ff"># Message sequences</font><br>
+active(G);<br>
+step();<br>
+<br>
+create_message(G,D,<font color="#ff00ff">&quot;db:DB&quot;</font>);<br>
+active(D);<br>
+step();<br>
+inactive(D);<br>
+<br>
+async();&nbsp;<font color="#0000ff"># use asynchrone messages (not-filled arrowheads)</font><br>
+<br>
+comment(D,C,down 1 right, wid 1 ht 0.7&nbsp;<font color="#ff00ff">&quot;waiting for&quot;</font>&nbsp;<font color="#ff00ff">&quot;condition&quot;</font>&nbsp;<font color="#ff00ff">&quot;dbMailbox&quot;</font>)<br>
+<br>
+message(U,G,<font color="#ff00ff">&quot;openBrowser&quot;</font>);<br>
+message(G,D,<font color="#ff00ff">&quot;query()&quot;</font>); active(D);<br>
+message(D,G,<font color="#ff00ff">&quot;result&quot;</font>); inactive(D);<br>
+<br>
+connect_to_comment(D,C)<br>
+<br>
+message(U,G,<font color="#ff00ff">&quot;scroll&quot;</font>);<br>
+message(G,D,<font color="#ff00ff">&quot;query()&quot;</font>); active(D);<br>
+message(D,G,<font color="#ff00ff">&quot;result&quot;</font>); inactive(D);<br>
+<br>
+connect_to_comment(D,C)<br>
+<br>
+message(U,G,<font color="#ff00ff">&quot;Exit&quot;</font>);<br>
+step();<br>
+begin_frame(G,F,<font color="#ff00ff">&quot;OnExit&quot;</font>);<br>
+message(G,D,<font color="#ff00ff">&quot;shutdown()&quot;</font>); inactive(G); active(D);<br>
+comment(G,C,down .2 right .2, wid 2 ht 0.25&nbsp;<font color="#ff00ff">&quot;wait for cond. dbShutdown&quot;</font>)<br>
+step();<br>
+comment(D,C,right, wid 2 ht 1 \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ff00ff">&quot;all queries preceeding the&quot;</font>&nbsp;\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ff00ff">&quot;shutdown in the mailbox&quot;</font>&nbsp;\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ff00ff">&quot;are answered already.&quot;</font>&nbsp;\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ff00ff">&quot;DbQuery-Objects can&quot;</font>&nbsp;\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ff00ff">&quot;be destroyed&quot;</font>)<br>
+message(D,G,<font color="#ff00ff">&quot;done&quot;</font>); inactive(D); active(G);<br>
+<br>
+sync();<br>
+destroy_message(G,D,<font color="#ff00ff">&quot;&quot;</font>);<br>
+<br>
+step();<br>
+end_frame(D,F);<br>
+<br>
+step();<br>
+inactive(G);<br>
+<br>
+<font color="#0000ff"># Complete the lifelines</font><br>
+step();<br>
+complete(G);<br>
+complete(U);<br>
+.PE<br>
+</font>
+
+</div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./dns.html" id="previous"><strong>Previous</strong>Sequence Diagram Example: A DNS Query</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./faq.html" id="next"><strong>Next</strong>Frequently Asked Questions</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

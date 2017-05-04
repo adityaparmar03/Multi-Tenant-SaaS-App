@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Example: Multiple Views Through Command-Line Options</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ceg-color.html" />
+<link rel="next" href="./ceg-view-spec.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+<link href="./../noteres/emacs.css" rel="stylesheet" type="text/css" id="highlight" />
+		
+</head>
+<body>
+<h1>Class Diagram Example: Multiple Views Through Command-Line Options</h1>
+Vadim Nasardinov noted that an advantage of UMLGraph over many
+GUI-oriented UML drawing tools is the ability
+to generate different views of a diagram
+from the same source description.
+The following two diagrams were generated from the same source;
+a Makefile illustrates a way to organize this process.
+<h2>Class Overview</h2>
+<img src="Root-small.png" alt="Class overview" />
+
+<h2>Detailed Class View</h2>
+<img src="Root.png" alt="Detailed class view" />
+
+<h2>Java Description</h2>
+<div class="highlight"><pre><span class="c1">// Author:  Vadim Nasardinov</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @assoc &quot;1..1&quot; - &quot;0..n&quot; Adapter</span>
+<span class="cm"> * @assoc &quot;&quot; - &quot;0..n&quot; ObjectType</span>
+<span class="cm"> * @assoc &quot;&quot; - &quot;0..n&quot; ObjectMap</span>
+<span class="cm"> * @assoc &quot;&quot; - &quot;0..n&quot; Table</span>
+<span class="cm"> * @assoc &quot;&quot; - &quot;0..n&quot; DataOperation</span>
+<span class="cm"> **/</span>
+<span class="kd">class</span> <span class="nc">Root</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Map</span> <span class="n">m_adapters</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span> <span class="n">m_types</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span> <span class="n">m_maps</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span> <span class="n">m_tables</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span> <span class="n">m_ops</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">Adapter</span> <span class="nf">getAdapter</span><span class="o">(</span><span class="n">Class</span> <span class="n">klass</span><span class="o">)</span> <span class="o">{}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Adapter</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Root</span> <span class="nf">getRoot</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Element</span> <span class="o">{</span>
+    <span class="n">Root</span> <span class="nf">getRoot</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">ObjectType</span> <span class="kd">extends</span> <span class="n">Element</span> <span class="o">{}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @has &quot;1..1&quot; - &quot;1..1&quot; ObjectType</span>
+<span class="cm"> **/</span>
+<span class="kd">class</span> <span class="nc">ObjectMap</span> <span class="kd">extends</span> <span class="n">Element</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">ObjectType</span> <span class="n">m_type</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Table</span> <span class="kd">extends</span> <span class="n">Element</span> <span class="o">{}</span>
+
+<span class="kd">class</span> <span class="nc">DataOperation</span> <span class="kd">extends</span> <span class="n">Element</span> <span class="o">{}</span>
+</pre></div>
+<h2>Makefile</h2>
+<div class="highlight"><pre><span class="c"># Author:  Vadim Nasardinov (vadimn@redhat.com)</span>
+<span class="c"># Since:   2004-05-26</span>
+<span class="c"># See:     http://www.spinellis.gr/umlgraph/doc/ceg-mv.html</span>
+
+<span class="c"># Requires: graphviz</span>
+<span class="c"># Requires: javadoc</span>
+<span class="c"># Requires: JAVA_HOME/lib/tools.jar</span>
+
+<span class="nf">.PHONY </span><span class="o">:</span> <span class="n">clean</span> <span class="n">all</span> <span class="n">dot</span> <span class="n">png</span>
+
+<span class="nv">UMLGRAPH</span>  <span class="o">:=</span> /var/vadim/binaries/UMLGraph-4.8
+<span class="nv">uml_graph</span> <span class="o">:=</span> <span class="k">$(</span>UMLGRAPH<span class="k">)</span>/lib/UmlGraph.jar
+
+<span class="nv">java_files</span> <span class="o">:=</span> <span class="k">$(</span>shell find diagrams -name *.java<span class="k">)</span>
+<span class="nv">dot_files</span>  <span class="o">:=</span> <span class="k">$(</span>subst .java,.dot,<span class="k">$(</span>java_files<span class="k">))</span>
+<span class="nv">dot_files</span>  <span class="o">:=</span> <span class="k">$(</span>foreach dot, <span class="k">$(</span>dot_files<span class="k">)</span>, build/<span class="k">$(</span>dot<span class="k">))</span>
+<span class="nv">dot_files</span>  <span class="o">+=</span> <span class="k">$(</span>subst .dot,-small.dot,<span class="k">$(</span>dot_files<span class="k">))</span>
+
+<span class="nv">png_files</span> <span class="o">:=</span> <span class="k">$(</span>subst .dot,.png,<span class="k">$(</span>dot_files<span class="k">))</span>
+
+<span class="nv">jd</span><span class="o">:=</span>javadoc
+<span class="nv">jd_flags</span> <span class="o">:=</span> -docletpath <span class="k">$(</span>uml_graph<span class="k">)</span> -doclet org.umlgraph.doclet.UmlGraph -private
+
+<span class="nv">jd_flags</span> <span class="o">+=</span> -nodefontsize <span class="m">9</span> -edgefontsize 9
+<span class="nv">jd_flags</span> <span class="o">+=</span> -nodefillcolor LemonChiffon
+<span class="nv">detailed_flags</span> <span class="o">:=</span> -attributes -operations -types
+
+<span class="nf">all</span><span class="o">:</span> <span class="n">png</span>
+
+<span class="nf">clean</span><span class="o">:</span>
+	rm -rf build
+
+<span class="nf">build/%.dot </span><span class="o">:</span> %.<span class="n">java</span>
+	mkdir -p <span class="k">$(</span>dir <span class="nv">$@</span><span class="k">)</span>
+	<span class="k">$(</span>jd<span class="k">)</span> <span class="k">$(</span>jd_flags<span class="k">)</span> <span class="k">$(</span>detailed_flags<span class="k">)</span> -output <span class="nv">$@</span> <span class="nv">$&lt;</span>
+
+<span class="nf">build/%-small.dot </span><span class="o">:</span> %.<span class="n">java</span>
+	mkdir -p <span class="k">$(</span>dir <span class="nv">$@</span><span class="k">)</span>
+	<span class="k">$(</span>jd<span class="k">)</span> <span class="k">$(</span>jd_flags<span class="k">)</span> -output <span class="nv">$@</span> <span class="nv">$&lt;</span>
+
+<span class="nf">%.png </span><span class="o">:</span> %.<span class="n">dot</span>
+	dot -Nheight<span class="o">=</span>0.2 -Elabelfontcolor<span class="o">=</span>DarkSlateBlue -Elabelfontsize<span class="o">=</span><span class="m">8</span> -Tpng -o <span class="nv">$@</span> <span class="nv">$&lt;</span>
+
+<span class="nf">build/%.png </span><span class="o">:</span> %.<span class="n">fig</span>
+	mkdir -p <span class="k">$(</span>dir <span class="nv">$@</span><span class="k">)</span>
+	fig2dev -L png -S <span class="m">4</span> <span class="nv">$&lt;</span> <span class="nv">$@</span>
+
+<span class="nf">dot</span><span class="o">:</span> <span class="k">$(</span><span class="nv">dot_files</span><span class="k">)</span>
+
+<span class="nf">png</span><span class="o">:</span> <span class="k">$(</span><span class="nv">png_files</span><span class="k">)</span>
+
+<span class="nf">build/%.png </span><span class="o">:</span> %.<span class="n">png</span>
+	mkdir -p <span class="k">$(</span>dir <span class="nv">$@</span><span class="k">)</span>
+	cp <span class="nv">$&lt;</span> <span class="nv">$@</span>
+
+<span class="c"># Example usage:</span>
+<span class="c">#   make debug-java_files</span>
+<span class="c">#   make debug-png_files</span>
+<span class="nf">debug-%</span><span class="o">:</span>
+	@echo <span class="nv">$*</span> is <span class="k">$(</span><span class="nv">$*</span><span class="k">)</span>
+</pre></div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ceg-color.html" id="previous"><strong>Previous</strong>Class Diagram Example: Fonts, Colors, Global and Local Options</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./ceg-view-spec.html" id="next"><strong>Next</strong>Class Diagram Example: Built-in Support for Views</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Thursday, October 13, 2016 11:34 am
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

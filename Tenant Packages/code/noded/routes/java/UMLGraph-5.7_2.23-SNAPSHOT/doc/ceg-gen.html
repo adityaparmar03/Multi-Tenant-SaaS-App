@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Example: Generalisation Relationships</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ceg-shape.html" />
+<link rel="next" href="./ceg-adv.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagram Example: Generalisation Relationships</h1>
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff">/*</font><br>
+<font color="#0000ff">&nbsp;* Generalisation</font><br>
+<font color="#0000ff">&nbsp;* UML User Guide p. 141</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<br>
+<font color="#0000ff">/* Basic categorisations */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Asset {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;InterestBearingItem {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;InsurableItem {}<br>
+<br>
+<font color="#0000ff">/* Asset types */</font><br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @extends InsurableItem</font><br>
+<font color="#0000ff">&nbsp;* @extends InterestBearingItem</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;BankAccount&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Asset {}<br>
+<font color="#0000ff">/** @extends InsurableItem */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;RealEstate&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Asset {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Security&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Asset {}<br>
+<br>
+<font color="#0000ff">/* Securities */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Stock&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Security {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Bond&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Security {}<br>
+<br>
+<font color="#0000ff">/* Bank accounts */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;CheckingAccount&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;BankAccount {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;SavingsAccount&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;BankAccount {}<br>
+</font>
+
+</div>
+</td><td>
+<img src="general.gif" alt="UML diagram showing generalization relationships" />
+</td></tr></table>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ceg-shape.html" id="previous"><strong>Previous</strong>Class Diagram Example: Shapes</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./ceg-adv.html" id="next"><strong>Next</strong>Class Diagram Example: Advanced Relationships</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Sequence Diagram Example: Nested Activation and Complex Interactions</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./seq-var.html" />
+<link rel="next" href="./dist-52.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Sequence Diagram Example: Nested Activation and Complex Interactions</h1>
+The following diagram, based on the one appearing on p. 436 of the
+UML User Guide, contains the most important elements
+of an interaction.
+It also uses nested
+<em>active</em> <em>inactive</em> calls to show a nested object activation.
+<h2>Diagram</h2>
+<img src="uml-appa.gif" alt="UML User Guide: Appendix A, p. 436" />
+<h2>Diagram Source Code</h2>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff"># UML User Guide: Appendix A,p. 436</font><br>
+<br>
+.PS<br>
+<br>
+copy&nbsp;<font color="#ff00ff">&quot;sequence.pic&quot;</font>;<br>
+<br>
+<font color="#0000ff"># Define the objects</font><br>
+pobject(E,<font color="#ff00ff">&quot;External Messages&quot;</font>);<br>
+object(T,<font color="#ff00ff">&quot;t:thread&quot;</font>);<br>
+object(O,<font color="#ff00ff">&quot;:Toolkit&quot;</font>);<br>
+pobject(P);<br>
+<br>
+step();<br>
+<br>
+<font color="#0000ff"># Message sequences</font><br>
+message(E,T,<font color="#ff00ff">&quot;a1: run(3)&quot;</font>);<br>
+active(T);<br>
+message(T,O,<font color="#ff00ff">&quot;run()&quot;</font>);<br>
+active(O);<br>
+message(O,O,<font color="#ff00ff">&quot;callbackLoop()&quot;</font>);<br>
+cmessage(O,P,<font color="#ff00ff">&quot;p:Peer&quot;</font>,<font color="#ff00ff">&quot; &quot;</font>);<br>
+active(O);<br>
+message(O,P,<font color="#ff00ff">&quot;handleExpose()&quot;</font>);<br>
+active(P);<br>
+rmessage(P,O,<font color="#ff00ff">&quot;&quot;</font>);<br>
+inactive(P);<br>
+inactive(O);<br>
+dmessage(O,P);<br>
+inactive(T);<br>
+inactive(O);<br>
+<br>
+step();<br>
+<br>
+complete(T);<br>
+complete(O);<br>
+<br>
+.PE<br>
+</font>
+
+</div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./seq-var.html" id="previous"><strong>Previous</strong>Sequence Diagram Variables</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./dist-52.html" id="next"><strong>Next</strong>Sequence Diagram Example: Concurrent Processes and Activations</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

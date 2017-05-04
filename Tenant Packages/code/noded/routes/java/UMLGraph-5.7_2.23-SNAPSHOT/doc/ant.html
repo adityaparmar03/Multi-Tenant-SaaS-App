@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Running the Doclet from Ant</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ceg-view-packages.html" />
+<link rel="next" href="./seq-intro.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Running the Doclet from Ant</h1>
+To run the UMLGraph doclet from <em>ant</em>, use a rule,
+like the following.
+<div class="code">
+
+<font face="monospace">
+<font color="#008080">&lt;</font><font color="#008080">target</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;uml&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>depends</b></font>=<font color="#ff00ff">&quot;prepare&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">property</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;uml.dir&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;${basedir}/uml&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">property</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;src.uml.dir&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;${src.dir}/uml&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">mkdir</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>dir</b></font>=<font color="#ff00ff">&quot;${uml.dir}&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">path</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>id</b></font>=<font color="#ff00ff">&quot;uml.source.path&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">pathelement</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>path</b></font>=<font color="#ff00ff">&quot;${src.uml.dir}/&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">pathelement</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>path</b></font>=<font color="#ff00ff">&quot;${src.java.dir}&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;/path&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">javadoc</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>sourcepathref</b></font>=<font color="#ff00ff">&quot;uml.source.path&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>packagenames</b></font>=<font color="#ff00ff">&quot;*&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>package</b></font>=<font color="#ff00ff">&quot;true&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">doclet</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;org.umlgraph.doclet.UmlGraph&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>path</b></font>=<font color="#ff00ff">&quot;${basedir}/lib/UmlGraph.jar&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-d&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;${uml.dir}&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;/doclet&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;/javadoc&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">apply</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>executable</b></font>=<font color="#ff00ff">&quot;dot&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>dest</b></font>=<font color="#ff00ff">&quot;${uml.dir}&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>parallel</b></font>=<font color="#ff00ff">&quot;false&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">arg</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;-Tpng&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">arg</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;-o&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">targetfile</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">srcfile</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">fileset</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>dir</b></font>=<font color="#ff00ff">&quot;${uml.dir}&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>includes</b></font>=<font color="#ff00ff">&quot;*.dot&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">mapper</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>type</b></font>=<font color="#ff00ff">&quot;glob&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>from</b></font>=<font color="#ff00ff">&quot;*.dot&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>to</b></font>=<font color="#ff00ff">&quot;*.png&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;/apply&gt;</font><br>
+&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;/target&gt;</font><br>
+</font>
+
+</div>
+<h2>Notes</h2>
+<ul>
+<li>When you pass the <code>packagenames</code> option to
+<em>javadoc</em>, the default (unnamed) package (and the
+<code>UMLOptions</code> class
+located in it) is ignored.
+In such cases you should include the <code>UMLOptions</code> class
+within a named package.</li>
+
+<li>The above invocation will generated a single class
+diagram. If multiple view generation is required you should add
+the <code>views</code> option.</li>
+</ul>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ceg-view-packages.html" id="previous"><strong>Previous</strong>Class Diagram Example: Views for Different Packages</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./seq-intro.html" id="next"><strong>Next</strong>Sequence Diagrams</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./PackageMatcher.html" title="org.umlgraph.doclet.PackageMatcher" alt="" coords="121,177,231,266"/>
+<area shape="rect" id="node1" href="./PackageMatcher.html" title="&lt;TABLE&gt;" alt="" coords="111,171,241,271"/>
+<area shape="rect" id="node3_1" href="http://docs.oracle.com/javase/7/docs/jdk/api/javadoc/doclet/com/sun/javadoc/PackageDoc.html" title="com.sun.javadoc.PackageDoc" alt="" coords="16,446,144,693"/>
+<area shape="rect" id="node3" href="http://docs.oracle.com/javase/7/docs/jdk/api/javadoc/doclet/com/sun/javadoc/PackageDoc.html" title="&lt;TABLE&gt;" alt="" coords="5,441,155,698"/>
+<area shape="rect" id="node4_2" href="http://docs.oracle.com/javase/7/docs/jdk/api/javadoc/doclet/com/sun/javadoc/ClassDoc.html" title="com.sun.javadoc.ClassDoc" alt="" coords="190,326,367,813"/>
+<area shape="rect" id="node4" href="http://docs.oracle.com/javase/7/docs/jdk/api/javadoc/doclet/com/sun/javadoc/ClassDoc.html" title="&lt;TABLE&gt;" alt="" coords="179,321,378,818"/>
+<area shape="rect" id="node2_3" href="./ClassMatcher.html" title="org.umlgraph.doclet.ClassMatcher" alt="" coords="179,11,274,117"/>
+<area shape="rect" id="node2" href="./ClassMatcher.html" title="&lt;TABLE&gt;" alt="" coords="169,6,285,122"/>
+</map>

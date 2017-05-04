@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Javadocs and UML class diagrams with UMLGraphDoc</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./cd-opt-spec.html" />
+<link rel="next" href="./views.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Javadocs and UML class diagrams with UMLGraphDoc</h1>
+UmlGraphDoc is a standard doclet wrapper that combines
+the standard doclet output (javadoc documentation) along with auto-generated
+class diagrams for both packages and classes.
+
+The UmlGraphDoc process is driven by all the parameters that can be specified for
+UMLGraph and the standard doclet; each will be passed to the appropriate
+doclet.
+
+Diagram generation is based on the idea of context:
+<ul>
+<li>for packages, the diagram contains all of the classes in the package itself</li>
+<li>for classes, the set of classes somehow related to the current class</li>
+</ul>
+
+The actual content of the diagrams depends on the kind of relations declared on the
+class files (with the UMLGraph javadoc annotations) and/or on the kind of automated
+inference that UMLGraph is allowed to use.
+
+UMLGraph javadocs are now generated with UmlGraphDoc with the following ant target:
+
+<div class="code">
+
+<font face="monospace">
+<font color="#008080">&lt;</font><font color="#008080">target</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;javadocs&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>depends</b></font>=<font color="#ff00ff">&quot;compile&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">javadoc</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>sourcepath</b></font>=<font color="#ff00ff">&quot;${src}&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>packagenames</b></font>=<font color="#ff00ff">&quot;org.umlgraph.doclet.*&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>destdir</b></font>=<font color="#ff00ff">&quot;${javadoc}&quot;</font><font color="#008080">&nbsp;</font><br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#2e8b57"><b>private</b></font>=<font color="#ff00ff">&quot;true&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">doclet</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;org.umlgraph.doclet.UmlGraphDoc&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>path</b></font>=<font color="#ff00ff">&quot;${lib}/UMLGraph.jar&quot;</font><font color="#008080">&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-inferrel&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-inferdep&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-hide&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;java.*&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-collpackages&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;java.util.*&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-qualify&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-postfixpackage&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-nodefontsize&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;9&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-nodefontpackagesize&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;7&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-link&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;<a href="http://java.sun.com/j2se/1.5.0/docs/guide/javadoc/doclet/spec">http://java.sun.com/j2se/1.5.0/docs/guide/javadoc/doclet/spec</a>&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;</font><font color="#008080">param</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">&quot;-link&quot;</font><font color="#008080">&nbsp;</font><font color="#2e8b57"><b>value</b></font>=<font color="#ff00ff">&quot;<a href="http://java.sun.com/j2se/1.5/docs/api">http://java.sun.com/j2se/1.5/docs/api</a>&quot;</font><font color="#008080">/&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;/doclet&gt;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#008080">&lt;/javadoc&gt;</font><br>
+<font color="#008080">&lt;/target&gt;</font><br>
+</font>
+
+</div>
+
+When generating documentation with UmlGraphDoc you will encounter
+at some point the "fur ball" effect: some central classes that
+have very complex context diagrams.
+To reduce this, you can avoid dependency inference
+altogheter, or reduce the number of inferred dependencies by using the -inferdepvis options.
+
+If you find that this is not enough and have suggestions on how to improve the situation further,
+we are eager to listen.
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./cd-opt-spec.html" id="previous"><strong>Previous</strong>Specifying class Diagram Options</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./views.html" id="next"><strong>Next</strong>Class Diagram Views</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

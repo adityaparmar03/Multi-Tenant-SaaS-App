@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Example: Relationships Inference</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ceg-adv.html" />
+<link rel="next" href="./ceg-schema.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagram Example: Relationships Inference</h1>
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#a020f0">import</font>&nbsp;java.util.List;<br>
+<font color="#a020f0">import</font>&nbsp;java.util.Map;<br>
+<font color="#a020f0">import</font>&nbsp;java.util.ArrayList;<br>
+<font color="#a020f0">import</font>&nbsp;java.util.Arrays;<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt inferrel</font><br>
+<font color="#0000ff">&nbsp;* @opt collpackages java.util.*</font><br>
+<font color="#0000ff">&nbsp;* @opt inferdep</font><br>
+<font color="#0000ff">&nbsp;* @opt inferdepinpackage</font><br>
+<font color="#0000ff">&nbsp;* @opt hide java.*</font><br>
+<font color="#0000ff">&nbsp;* @hidden</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;UMLOptions {}<br>
+<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Person {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;House[]&nbsp;houses;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Dog&gt; dogs;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>public</b></font>&nbsp;Room getFavouriteRoom(House house)&nbsp;{}<br>
+}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt inferreltype composed</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;House {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String, Room&gt; nameRoomMap;<br>
+}<br>
+<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Room {}<br>
+<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Dog {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Person owner;<br>
+}<br>
+<br>
+</font>
+
+</div>
+</td><td>
+<img src="infer.png" alt="UML diagram with relationship inference" />
+</td></tr></table>
+
+<p/>In this diagram we enabled both relationship and dependency inference.<br/>
+To make sure Person.dogs and Person.friends are interpreted as one to many relationship 
+the <code>collpackage</code> option has to be specified.
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ceg-adv.html" id="previous"><strong>Previous</strong>Class Diagram Example: Advanced Relationships</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./ceg-schema.html" id="next"><strong>Next</strong>Class Diagram Example: Schema</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

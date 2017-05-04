@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Example: Shapes</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./views.html" />
+<link rel="next" href="./ceg-gen.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagram Example: Shapes</h1>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @hidden</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontcolor &quot;blue&quot;</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;UMLNoteOptions{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;Structural Things</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt commentname</font><br>
+<font color="#0000ff">&nbsp;* @note Notes can</font><br>
+<font color="#0000ff">&nbsp;* be extended to</font><br>
+<font color="#0000ff">&nbsp;* span multiple lines</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Structural{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;spelling.java</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt shape component</font><br>
+<font color="#0000ff">&nbsp;* @opt commentname</font><br>
+<font color="#0000ff">&nbsp;* @note Component</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Component&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Structural{}<br>
+<br>
+<font color="#0000ff">/** @opt shape node */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Node&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Structural{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;Chain of</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;responsibility</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt shape collaboration</font><br>
+<font color="#0000ff">&nbsp;* @opt commentname</font><br>
+<font color="#0000ff">&nbsp;* @note Collaboration</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Collaboration&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Structural{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;Place order</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt shape usecase</font><br>
+<font color="#0000ff">&nbsp;* @opt commentname</font><br>
+<font color="#0000ff">&nbsp;* @note Use Case</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;UseCase&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Structural{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;Business rules</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt shape package</font><br>
+<font color="#0000ff">&nbsp;* @opt commentname</font><br>
+<font color="#0000ff">&nbsp;* @note Package</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Package{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt all</font><br>
+<font color="#0000ff">&nbsp;* @note Class</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Counter&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Structural {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>static</b></font>&nbsp;<font color="#2e8b57"><b>public</b></font>&nbsp;<font color="#2e8b57"><b>int</b></font>&nbsp;counter;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>public</b></font>&nbsp;<font color="#2e8b57"><b>int</b></font>&nbsp;getCounter();<br>
+}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt shape activeclass</font><br>
+<font color="#0000ff">&nbsp;* @opt all</font><br>
+<font color="#0000ff">&nbsp;* @note Active Class</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;RunningCounter&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;Counter{}<br>
+<br>
+</font>
+
+</div>
+<p/>
+<img src="shapes.gif" alt="UML diagram showing the shapes supported by UMLGraph" />
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./views.html" id="previous"><strong>Previous</strong>Class Diagram Views</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./ceg-gen.html" id="next"><strong>Next</strong>Class Diagram Example: Generalisation Relationships</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

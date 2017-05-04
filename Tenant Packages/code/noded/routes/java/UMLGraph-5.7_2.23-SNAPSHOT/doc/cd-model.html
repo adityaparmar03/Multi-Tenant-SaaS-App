@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Modelling</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./cd-oper.html" />
+<link rel="next" href="./cd-note.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Modelling</h1>
+The UMLGraph class diagrams allows you to model
+<ul>
+<li>classes (specified as Java classes)
+</li>
+<li>
+active classes, components, nodes, use cases,
+collaborations, and packages
+(specified as Java classes with an <code>@opt shape</code> tag)
+</li>
+<li>attributes (specified as Java class fields)
+</li>
+<li>operations (specified as Java class methods)
+</li>
+<li>stereotypes (using the <code>@stereotype</code> <em>name</em> tag)
+</li>
+<li>tagged values (using the <code>@tagvalue</code> <em>name</em> <em>value</em> tag)
+</li>
+<li>implementation relationships (specified using the Java <code>implements</code> declaration)
+</li>
+<li>generalization relationships (specified using the Java <code>extends</code> declaration or (for multiple inheritance) the <em>javadoc</em> <code>@extends</code> tag)
+</li>
+<li>association relationships (specified using the <em>javadoc</em> <code>@assoc</code> tag) </li>
+<li>navigable (directed) association relationships (specified using the <em>javadoc</em> <code>@navassoc</code> tag) </li>
+<li>aggregation relationships (specified using the <em>javadoc</em> <code>@has</code> tag) </li>
+<li>navigable aggregation relationships (specified using the <em>javadoc</em> <code>@navhas</code> tag) </li>
+<li>composition relationships (specified using the <em>javadoc</em> <code>@composed</code> tag) </li>
+<li>navigable composition relationships (specified using the <em>javadoc</em> <code>@navcomposed</code> tag) </li>
+<li>dependency relationships (specified using the <em>javadoc</em> <code>@depend</code> tag)
+</li>
+</ul>
+All relationship tags apart from <code>@extends</code> take four arguments:
+<ol>
+<li> The source adornments (role, multiplicity, and visibility)
+</li>
+<li> The relationship name
+</li>
+<li> The target adornments (role, multiplicity, and visibility)
+</li>
+<li> The target class
+</li>
+</ol>
+Arguments can be space-separated, or enclosed in quotes if they
+need to contain the space character.
+The - character is used as a placeholder to denote empty arguments.
+You can use the \n sequence to separate the first three adornments
+in separate centered lines;
+the \l and \r sequences can also be used to generate left and right
+aligned lines.
+You can use the &lt; and &gt; characters in the relationship name
+to enclose stereotype names.
+These will be automatically enclosed in guillemots.
+Note that a relationship's target class is not implicitly
+defined; it should also be specified using the Java class syntax.
+The target can be specified by simple name, java class lookup rules 
+(imports and visibility) will be used to determine the actual class.
+The following is an example of a relationship
+specification and the resulting UML diagram:
+<table>
+<tr><td>
+<pre>
+class Tyre {}
+class Engine {}
+class Body {}
+
+/**
+ * @composed 1 - 4 Tyre
+ * @composed 1 - 1 Engine
+ * @composed 1 - 1 Body
+ */
+class Car {}
+</pre>
+</td><td>
+<img src="car.gif" alt="UML relationship diagram" />
+</td></tr></table>
+
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./cd-oper.html" id="previous"><strong>Previous</strong>Class Diagram Operations</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./cd-note.html" id="next"><strong>Next</strong>Notes in Class Diagrams</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

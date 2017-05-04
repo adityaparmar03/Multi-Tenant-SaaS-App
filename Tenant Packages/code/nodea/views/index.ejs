@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Multi-tanent SAAS APP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<meta name="description" content="Multi-tanent SAAS APP">-->
+	<!-- Latest compiled and minified CSS -->
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+	<style>
+	body{
+		padding-top: 40px;
+	}
+	</style>
+
+<body data-spy="scroll" data-target="#my-navbar">
+
+  <!-- Navbar -->
+  	<nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
+  		<div class="container">
+  			<div class="navbar-header">
+  				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  				</button>
+
+  				<a href="" class="navbar-brand">ADITYA</a>
+  			</div><!-- Navbar Header-->
+  			<div class="collapse navbar-collapse" id="navbar-collapse">
+  				
+  			<!--<a class="btn btn-warning navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">SIGN IN</a>-->
+  				<ul class="nav navbar-nav">
+  					<li><a href="">Diagram</a> 
+  					<li><a href="#Grading">Grading</a> 
+  				</ul>
+  			</div>
+  		</div><!-- End Container-->
+  	</nav><!-- End navbar -->
+
+  	
+<div style="margin-top: 4%;margin-left: 7%">
+    <p style="color:#ffa11b;font-weight: bold"> Current Selected Tenant is : Class Diagram By Pranjali. To change Tenant <a data-toggle="modal" data-target="#myModal">click here</a>.</p>
+
+</div>
+  	
+<!-- Diagram -->
+
+  <div class="container">
+    <section>
+      <div class="page-header" id="Diagram">
+
+          <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <!--<div><h4>Choose Tenant :-
+                                <select id="tenant_choice" class="btn btn-primary dropdown-toggle">
+                                    <option value="volvo" id="tc1">Pranjali</option>
+                                    <option value="saab" id="tc2">Aashi</option>
+                                    <option value="mercedes" id="tc3">Sequence</option>
+                                    <option value="audi" id="tc4">UML Graph</option>
+                                </select></h4>
+                            </div>-->
+
+                            <h4>File Upload:-</h4>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar"></div>
+                            </div>
+                            <button class="btn btn-primary" type="button" id="upload-btn">Upload File</button>
+                            <input id="upload-input" type="file" name="uploads[]" multiple="multiple" style="display: none" >
+                            <p id="showfilename"></p>
+                            <form action="tagetDiagram" method="post" enctype="multipart/form-data">
+                                <button class="btn btn-primary">Get Diagram</button>
+                            </form>
+                            <br/>
+                            <p style="color: red"><%=errmsg%></p>
+                            <img src="<%=filename%>" class="img-thumbnail" style="visibility:<%=visibility%>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+
+  <!-- End the row -->
+
+<!-- Grading -->
+
+  <div class="container">
+    <section>
+      <div class="page-header" id="Grading">
+          <h4>Grading :-</h4>
+        </div><!-- End Page Header -->
+
+       
+          
+          <div class="col-lg-8">
+            <form action="" class="form-horizontal">
+              <div class="form-group">
+                <label for="user-name" class="col-lg-2 control-label">Score:</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="user-name" placeholder="Please enter score in percentage">
+                </div>
+              </div><!-- End form group -->
+
+           
+
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+
+             
+
+            </form>
+          </div>
+        </div><!-- End the row -->
+
+    </section>
+  </div>
+<!-- SIGN IN Popup -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Change Tenant</h4>
+        </div>
+        <!-- ADD TEXT INPUT AND BUTTON -->
+        <div class="modal-body">
+          
+          <form>
+              <div class="form-group">
+                  <ul>
+                      <li><a href="/ta/">Class Diagram by Pranjali</a></li><br>
+                      <li><a href="/tb/">Class Diagram by Aashi</a></li><br>
+                      <li><a href="/tc/">Sequence Diagram by Prof. Paul</a></li><br>
+                      <li><a href="/td/">Uml-graph Diagram by Prof. Paul</a></li><br>
+                  </ul>
+
+
+
+
+              </div>
+              
+
+          </form>
+        </div>
+        <!--<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>-->
+      </div>
+      
+    </div>
+  </div>
+
+<!-- Footer -->
+
+
+     <footer>
+          <hr>
+            <div class="container text-center">
+
+
+            <p>&copy; Copyright @ ADITYA PARMAR</p>
+
+          </div><!-- end Container-->
+
+
+     </footer>
+
+    
+
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script >
+      $('#upload-btn').on('click', function (){
+          $('#upload-input').click();
+          $('.progress-bar').text('0%');
+          $('.progress-bar').width('0%');
+      });
+
+      $('#upload-input').on('change', function(){
+
+          var files = $(this).get(0).files;
+
+          if (files.length > 0){
+              // create a FormData object which will be sent as the data payload in the
+              // AJAX request
+              var formData = new FormData();
+
+              // loop through all the selected files and add them to the formData object
+              for (var i = 0; i < files.length; i++) {
+                  var file = files[i];
+
+                  // add the files to formData object for the data payload
+                  formData.append('uploads[]', file, file.name);
+              }
+
+              $.ajax({
+                  url: 'taupload',
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  success: function(data){
+                      console.log('upload successful!\n' + data);
+                  },
+                  xhr: function() {
+                      // create an XMLHttpRequest
+                      var xhr = new XMLHttpRequest();
+
+                      // listen to the 'progress' event
+                      xhr.upload.addEventListener('progress', function(evt) {
+
+                          if (evt.lengthComputable) {
+                              // calculate the percentage of upload completed
+                              var percentComplete = evt.loaded / evt.total;
+                              percentComplete = parseInt(percentComplete * 100);
+
+                              // update the Bootstrap progress bar with the new percentage
+                              $('.progress-bar').text(percentComplete + '%');
+                              $('.progress-bar').width(percentComplete + '%');
+
+                              // once the upload reaches 100%, set the progress bar text to done
+                              if (percentComplete === 100) {
+                                  $('.progress-bar').html('Done');
+                              }
+
+                          }
+
+                      }, false);
+
+                      return xhr;
+                  }
+              });
+
+          }
+      });
+
+      // Reference : https://coligo.io/building-ajax-file-uploader-with-node/
+  </script>
+
+</body>	
+</html>

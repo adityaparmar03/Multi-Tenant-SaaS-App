@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>An Improved Sequence Diagram</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./seq-simple.html" />
+<link rel="next" href="./seq-cd.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>An Improved Sequence Diagram</h1>
+Let us try to improve the simple sequence diagram.
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff"># Object definition</font><br>
+object(S,<font color="#ff00ff">&quot;s:Switch&quot;</font>);<br>
+object(P,<font color="#ff00ff">&quot;p:Pump&quot;</font>);<br>
+step();<br>
+active(S);<br>
+active(P);<br>
+<br>
+<font color="#0000ff"># Message exchange</font><br>
+message(S,P,<font color="#ff00ff">&quot;run()&quot;</font>);<br>
+message(S,P,<font color="#ff00ff">&quot;stop()&quot;</font>);<br>
+<br>
+<font color="#0000ff"># Object lifeline completion</font><br>
+step();<br>
+complete(S);<br>
+complete(P);<br>
+</font>
+
+</div>
+Here, we have manually advanced the timeline of our diagrams
+with a <code>step();</code> call after we defined the objects,
+to provide them with a bit of breathing space.
+We also added a similar step call at the end of the diagram.
+Finally, we made both objects active, after their definition.
+Calling active on a given object will change the drawing of its
+lifeline, from the dashed format indicating an inactive object,
+to a thick swimming-lane, active object, format.
+<p />
+The resultant diagram is<br />
+<img src="seq-impr.gif" alt="Improved sequence diagram" />
+<p />
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./seq-simple.html" id="previous"><strong>Previous</strong>Defining a Simple Sequence Diagram</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./seq-cd.html" id="next"><strong>Next</strong>Creating and Destroying Objects</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

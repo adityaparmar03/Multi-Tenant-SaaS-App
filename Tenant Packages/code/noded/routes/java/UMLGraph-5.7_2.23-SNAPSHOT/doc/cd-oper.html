@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Operations</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./cd-intro.html" />
+<link rel="next" href="./cd-model.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagram Operations</h1>
+UMLGraph's input follows the Java syntax and semantics.
+However,
+since the main purpose of UMLGraph is the declarative specification of
+UML diagrams there is no need to flesh-out each class's methods,
+to completely specify each class, or to specify package information.
+You only specify the details you want to appear on the graph.
+If you wish your (Java) implementation to evolve together with the
+design feel free to include code or additional details.
+You can hide these details from the UML diagram using the <em>javadoc</em>
+<code>@hidden</code> tag applied to classes, methods, and fields.
+In theory you can also use UMLGraph to reverse engineer existing
+Java code.
+Note however that UMLGraph was not originally designed for this purpose;
+the resulting graphs may be large and unwieldy.
+<p />
+There are various ways to invoke UMLGraph,
+each providing a different balance between convenience and flexibility.
+<h2>Option 1: Using the Supplied Script</h2>
+This is the simplest option.
+If <code>umlgraph</code> (or <code>umlgraph.bat</code>) is correctly
+installed,
+you can run UMLGraph by simply specifying the basename of
+the Java file containing the diagram specification and the file type of
+the generated diagram (e.g. gif, ps, png, svg).
+Example:
+<div class="code">
+
+<font face="monospace">
+umlgraph Test png<br>
+</font>
+
+</div>
+Any additional UMLGraph or <em>javadoc</em> arguments can be added at
+the end of the command line.
+This command will read the specification file (e.g. Test.java) and
+generate directly a diagram of the appropriate type
+(e.g. Test.png).
+<h2>Option 2: Running Java</h2>
+This option provides the maximum flexibility.
+In order to run, <em>javadoc</em> needs to access <code>tools.jar</code>.
+You can accomplish this in two ways.
+<ol>
+<li>
+Specify the location of <code>tools.jar</code> as a part of Java's classpath
+and specify the full name of the UMLGraph doclet as an argument to Java.
+This is an invocation example under Windows
+<div class="code">
+
+<font face="monospace">
+java -classpath&nbsp;<font color="#ff00ff">&quot;lib/UmlGraph.jar;c:\program files\java\jdk1.6.0_02\lib\Tools.jar&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;org.umlgraph.doclet.UmlGraph -package Test.java<br>
+</font>
+
+</div>
+and under Unix
+<div class="code">
+
+<font face="monospace">
+java&nbsp;<font color="#6a5acd">-classpath</font>&nbsp;<font color="#804040"><b>'</b></font><font color="#ff00ff">/usr/share/lib/UmlGraph.jar:/opt/Java-1.6/lib/tools.jar</font><font color="#804040"><b>'</b></font>&nbsp;<font color="#804040"><b>\</b></font><br>
+org.umlgraph.doclet.UmlGraph&nbsp;<font color="#6a5acd">-package</font>&nbsp;Test.java<br>
+</font>
+
+</div>
+</li>
+<li> Place the <code>UmlGraph.jar</code>
+file in a directory that also contains the Java SDK <code>tools.jar</code> file.
+You can accomplish this either by copying <code>UmlGraph.jar</code> to the SDK
+<code>lib</code> directory where <code>tools.jar</code> resides,
+or by copying the JDK <code>tools.jar</code> file into the directory
+where you installed UMLGraph.
+You then run
+<div class="code">
+
+<font face="monospace">
+java&nbsp;<font color="#6a5acd">-jar</font>&nbsp;/path/to/UmlGraph.jar yourfile1.java ...<br>
+</font>
+
+</div>
+</li>
+</ol>
+You can use any of the <em>javadoc</em> general options;
+<code>-private</code> is usually needed to avoid having to explicitly
+specify public elements.
+Example:
+<div class="code">
+
+<font face="monospace">
+java&nbsp;<font color="#6a5acd">-jar</font>&nbsp;/usr/jvm/java<font color="#ff00ff">-1</font>.<font color="#ff00ff">5</font>.<font color="#ff00ff">0</font>/lib/UmlGraph.jar&nbsp;<font color="#6a5acd">-private</font>&nbsp;Simple.java<br>
+</font>
+
+</div>
+<p />
+To generate a diagram of all classes in the package specify as arguments
+to the Java invocation the name of the package and the directory where
+it resides.
+The following example generates a diagram of all UMLGraph classes.
+<div class="code">
+
+<font face="monospace">
+java&nbsp;<font color="#6a5acd">-classpath</font>&nbsp;... org.umlgraph.doclet.UmlGraph&nbsp;<font color="#6a5acd">-sourcepath</font>&nbsp;src/main/java org.umlgraph.doclet<br>
+</font>
+
+</div>
+<p />
+Specifying some packages before the list of source files will designate
+those packages as <em>local</em>.
+When you specify a package list,
+the SVG output UMLgraph generates will contain
+local hyperlinks for the local classes
+and hyperlinks to the Sun Java API documentation for all other classes.
+<p />
+
+<h2>Option 3: Running Javadoc</h2>
+Alternatively, you can also run <em>UMLGraph</em> from within <em>javadoc</em>.
+This can be useful if your IDE provides additional support for running <em>javadoc</em>.
+In this case you run
+<em>javadoc</em> with arguments <code>-doclet org.umlgraph.doclet.UmlGraph</code>
+<code>-docletpath /path/to/UmlGraph.jar</code>
+and append at the end the file(s) that contain your diagram
+specification.
+Example:
+<div class="code">
+
+<font face="monospace">
+javadoc&nbsp;<font color="#6a5acd">-docletpath</font>&nbsp;UmlGraph.jar&nbsp;<font color="#6a5acd">-doclet</font>&nbsp;org.umlgraph.doclet.UmlGraph&nbsp;<font color="#6a5acd">-private</font>&nbsp;Simple.java<br>
+</font>
+
+</div>
+
+<h2>Running Dot</h2>
+The last two options, will generate the UML diagram in
+<em>Graphviz</em> <em>dot</em> format.
+This is a text file that can be processed by the <em>Graphviz</em> <em>dot</em>
+program to layout and draw the graph.
+<em>javadoc</em> will create by default a file named <code>graph.dot</code>
+in the current directory.
+A command line like the following will convert the <code>graph.dot</code>
+file into Postscript:
+<div class="code">
+
+<font face="monospace">
+dot&nbsp;<font color="#6a5acd">-Tps</font>&nbsp;<font color="#6a5acd">-ograph</font>.ps graph.dot<br>
+</font>
+
+</div>
+or PNG
+<div class="code">
+
+<font face="monospace">
+dot&nbsp;<font color="#6a5acd">-Tpng</font>&nbsp;<font color="#6a5acd">-ograph</font>.png graph.dot<br>
+</font>
+
+</div>
+Refer to the <em>dot</em> documentation for information on creating other file formats
+or adjusting the UMLGraph output.
+<p />
+You also can pipe the result of <em>UMLGraph</em> directly into <em>dot</em>:
+<div class="code">
+
+<font face="monospace">
+java&nbsp;<font color="#6a5acd">-jar</font>&nbsp;/.../UmlGraph.jar&nbsp;<font color="#6a5acd">-private</font>&nbsp;<font color="#6a5acd">-output</font>&nbsp;- Simple.java | dot&nbsp;<font color="#6a5acd">-Tgif</font>&nbsp;<font color="#6a5acd">-ograph</font>.gif<br>
+</font>
+
+</div>
+<p />
+Note that when you use <em>dot</em> for generating SVG diagrams your
+should specify the <code>-outputencoding UTF-8</code> option to UMLGraph.
+This option will correctly render the stereotype guillemot characters
+in the <em>dot</em> output and the corresponding SVG file.
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./cd-intro.html" id="previous"><strong>Previous</strong>Class Diagrams</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./cd-model.html" id="next"><strong>Next</strong>Class Modelling</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Monday, October 5, 2015 3:14 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

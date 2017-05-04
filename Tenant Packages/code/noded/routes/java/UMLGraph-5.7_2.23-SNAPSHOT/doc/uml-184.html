@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Sequence Diagram Example: Lifeline Constraints</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./uml-182.html" />
+<link rel="next" href="./uml-71.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Sequence Diagram Example: Lifeline Constraints</h1>
+The following diagram, based on Figure 18-4 appearing on p. 252 of the
+UML User Guide, illustrates constraints on an object's lifeline,
+used both as genuine constraints, and to place a message label
+on a particular position.
+In addition, this diagram also uses nested activation.
+<h2>Diagram</h2>
+<img src="uml-184.gif" alt="UML User Guide: Figure 18-4, p. 252" />
+<h2>Diagram Source Code</h2>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff"># UML User Guide: Figure 18-4</font><br>
+<br>
+.PS<br>
+<br>
+copy&nbsp;<font color="#ff00ff">&quot;sequence.pic&quot;</font>;<br>
+<br>
+movewid = 0.5;<br>
+<br>
+<font color="#0000ff"># Define the objects</font><br>
+object(S,<font color="#ff00ff">&quot;s:Caller&quot;</font>);<br>
+object(W,<font color="#ff00ff">&quot;:Switch&quot;</font>);<br>
+pobject(C);<br>
+object(R,<font color="#ff00ff">&quot;r:Caller&quot;</font>);<br>
+<br>
+<font color="#0000ff"># Message sequences</font><br>
+step();<br>
+active(W);<br>
+async(); message(S,W,<font color="#ff00ff">&quot;liftReceiver&quot;</font>); sync();<br>
+active(S);<br>
+message(W,S,<font color="#ff00ff">&quot;setDialTone()&quot;</font>);<br>
+async(); message(S,W,<font color="#ff00ff">&quot;*dialDigit(d)&quot;</font>); sync();<br>
+lconstraint(W,<font color="#ff00ff">&quot;{dialing.executionTime &lt; 30s}&quot;</font>);<br>
+active(W);<br>
+message(W,W,<font color="#ff00ff">&quot;routeCalls(s,n)&quot;</font>);<br>
+inactive(W);<br>
+cmessage(W,C,<font color="#ff00ff">&quot;c:Convers&quot;</font>);<br>
+active(C);<br>
+message(C,R,<font color="#ff00ff">&quot;ring()&quot;</font>);<br>
+active(R);<br>
+async(); message(R,C,<font color="#ff00ff">&quot;liftReceiver&quot;</font>); sync();<br>
+message(C,W,<font color="#ff00ff">&quot;connect(r,s)&quot;</font>);<br>
+message(W,S,<font color="#ff00ff">&quot;connect(r)&quot;</font>);<br>
+<font color="#0000ff"># Specify label as a &quot;constraint&quot; to allign on W</font><br>
+message(W,R,<font color="#ff00ff">&quot;&quot;</font>); lconstraint(W,<font color="#ff00ff">&quot;connect(s)&quot;</font>);<br>
+step();<br>
+<br>
+complete(S);<br>
+complete(W);<br>
+complete(C);<br>
+complete(R);<br>
+<br>
+.PE<br>
+</font>
+
+</div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./uml-182.html" id="previous"><strong>Previous</strong>Sequence Diagram Example: Create and Destroy</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./uml-71.html" id="next"><strong>Next</strong>Sequence Diagram Example: External Actor</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

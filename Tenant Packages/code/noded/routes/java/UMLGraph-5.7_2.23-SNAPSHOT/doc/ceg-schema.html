@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Example: Schema</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ceg-infer.html" />
+<link rel="next" href="./ceg-er.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagram Example: Schema</h1>
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff">/*</font><br>
+<font color="#0000ff">&nbsp;* Schema model</font><br>
+<font color="#0000ff">&nbsp;* UML User Guide p. 112</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt operations</font><br>
+<font color="#0000ff">&nbsp;* @opt attributes</font><br>
+<font color="#0000ff">&nbsp;* @opt types</font><br>
+<font color="#0000ff">&nbsp;* @hidden</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;UMLOptions {}<br>
+<br>
+<font color="#0000ff">/* Define some types we use */</font><br>
+<font color="#0000ff">/** @hidden */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Name {}<br>
+<font color="#0000ff">/** @hidden */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Number {}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @has 1..* Member * Student</font><br>
+<font color="#0000ff">&nbsp;* @composed 1..* Has 1..* Department</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;School {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name name;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String address;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number phone;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;addStudent()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;removeStudent()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;getStudent()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;getAllStudents()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;addDepartment()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;removeDepartment()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;getDepartment()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;getAllDepartments()&nbsp;{}<br>
+}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @has 1..* AssignedTo 1..* Instructor</font><br>
+<font color="#0000ff">&nbsp;* @assoc 1..* - 1..* Course</font><br>
+<font color="#0000ff">&nbsp;* @assoc 0..* - &quot;0..1 chairperson&quot; Instructor</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Department {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name name;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;addInstructor()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;removeInstructor()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;getInstructor()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;getAllInstructors()&nbsp;{}<br>
+}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @assoc * Attends * Course</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Student {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name name;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number studentID;<br>
+}<br>
+<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Course {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name name;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number courseID;<br>
+}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @assoc 1..* Teaches * Course</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Instructor {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name name;<br>
+}<br>
+</font>
+
+</div>
+</td><td>
+<img src="schema.gif" alt="UML diagram showing a database scheme model" />
+</td></tr></table>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ceg-infer.html" id="previous"><strong>Previous</strong>Class Diagram Example: Relationships Inference</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./ceg-er.html" id="next"><strong>Next</strong>Class Diagram Example: ER</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

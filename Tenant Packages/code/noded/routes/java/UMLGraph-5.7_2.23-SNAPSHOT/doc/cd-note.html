@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Notes in Class Diagrams</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./cd-model.html" />
+<link rel="next" href="./cd-opt.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Notes in Class Diagrams</h1>
+In UMLGraph you can easily add a note (comment) to an element,
+using the <code>@note</code> tag.
+The corresponding text will be split into lines, as specified in the note.
+Multiple tags can be used to add more notes to the same element.
+More complicated, (one to many) relationships can be established
+by creating an element with a note shape, setting its contents
+to its comment text through the <code>@opt commentname</code> tag,
+and associating it with other elements with the <code>@assoc</code>
+tag.
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt shape node</font><br>
+<font color="#0000ff">&nbsp;* @note Located in the</font><br>
+<font color="#0000ff">&nbsp;* machine room</font><br>
+<font color="#0000ff">&nbsp;* @note Sun Blade 6048</font><br>
+<font color="#0000ff">&nbsp;* @depend - - - MapLocation</font><br>
+<font color="#0000ff">&nbsp;* @depend - - - DataMine</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Server{}<br>
+<br>
+<font color="#0000ff">/** @opt shape component */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;MapLocation {}<br>
+<br>
+<font color="#0000ff">/** @opt shape component */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;DataMine {}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;CPU-munching</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;components that must</font><br>
+<font color="#0000ff">&nbsp;*</font><font color="#6a5acd">&nbsp;run on this server</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt shape note</font><br>
+<font color="#0000ff">&nbsp;* @opt commentname</font><br>
+<font color="#0000ff">&nbsp;* @assoc - - - MapLocation</font><br>
+<font color="#0000ff">&nbsp;* @assoc - - - DataMine</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;munchComment {}<br>
+</font>
+
+</div>
+</td><td>
+<img src="note.gif" alt="UML note example" />
+</td></tr></table>
+
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./cd-model.html" id="previous"><strong>Previous</strong>Class Modelling</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./cd-opt.html" id="next"><strong>Next</strong>Class Diagram Options</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

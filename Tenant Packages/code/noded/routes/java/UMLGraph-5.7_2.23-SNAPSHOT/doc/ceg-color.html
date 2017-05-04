@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Example: Fonts, Colors, Global and Local Options</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ceg-ster.html" />
+<link rel="next" href="./ceg-mv.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagram Example: Fonts, Colors, Global and Local Options</h1>
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt edgecolor &quot;yellow&quot;</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontname &quot;Times&quot;</font><br>
+<font color="#0000ff">&nbsp;* @opt bgcolor &quot;.7 .9 1&quot;</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefillcolor &quot;#a0a0a0&quot;</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontsize 14</font><br>
+<font color="#0000ff">&nbsp;* @hidden</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;UMLOptions{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt nodefontname &quot;Helvetica-Bold&quot;</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontcolor &quot;white&quot;</font><br>
+<font color="#0000ff">&nbsp;* @composed - - - Red</font><br>
+<font color="#0000ff">&nbsp;* @composed - - - Green</font><br>
+<font color="#0000ff">&nbsp;* @composed - - - Blue</font><br>
+<font color="#0000ff">&nbsp;* @opt attributes</font><br>
+<font color="#0000ff">&nbsp;* @opt visibility</font><br>
+<font color="#0000ff">&nbsp;* @opt types</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Pixel {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>private</b></font>&nbsp;<font color="#2e8b57"><b>int</b></font>&nbsp;x, y;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>public</b></font>&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;setColor(ColorValue v)&nbsp;{}<br>
+}<br>
+<br>
+<font color="#0000ff">/** @opt nodefillcolor red */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Red {}<br>
+<br>
+<font color="#0000ff">/** @opt nodefillcolor green */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Green {}<br>
+<br>
+<font color="#0000ff">/** @opt nodefillcolor blue */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Blue {}<br>
+<br>
+<font color="#0000ff">/** @hidden */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;ColorValue{}<br>
+</font>
+
+</div>
+</td><td>
+<img src="color.gif" alt="UML diagram demonstrating the use of colors" />
+</td></tr>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#a020f0">package</font>&nbsp;net.sf.whatever.test;<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @hidden</font><br>
+<font color="#0000ff">&nbsp;* @opt postfixpackage</font><br>
+<font color="#0000ff">&nbsp;* @opt edgefontname arialbd</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontname arial</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontsize 9</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontabstract ariali</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontclassname arialbd</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontclassabstractname arialbi</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefonttagsize 6</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefonttagname ariali</font><br>
+<font color="#0000ff">&nbsp;* @opt nodefontpackagesize 8</font><br>
+<font color="#0000ff">&nbsp;* @opt operations</font><br>
+<font color="#0000ff">&nbsp;* @opt attributes</font><br>
+<font color="#0000ff">&nbsp;* @opt qualify</font><br>
+<font color="#0000ff">&nbsp;* @opt types</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;UMLOptions{}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @stereotype base</font><br>
+<font color="#0000ff">&nbsp;* @tagvalue since 1.0</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>abstract</b></font>&nbsp;<font color="#2e8b57"><b>class</b></font>&nbsp;AbstractBase {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">/** @tagvalue since 1.5 */</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>private</b></font>&nbsp;<font color="#2e8b57"><b>int</b></font>&nbsp;field;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>public</b></font>&nbsp;<font color="#2e8b57"><b>abstract</b></font>&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;abstractMethod();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>public</b></font>&nbsp;<font color="#2e8b57"><b>int</b></font>&nbsp;concreteMethod()&nbsp;{&nbsp;<font color="#804040"><b>return</b></font>&nbsp;<font color="#ff00ff">1</font>; }<br>
+}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @composed 1 has * from.Outer.Space.AlienClass</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Composite&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractBase {}<br>
+<br>
+<font color="#2e8b57"><b>public</b></font>&nbsp;<font color="#2e8b57"><b>class</b></font>&nbsp;Style&nbsp;<font color="#2e8b57"><b>extends</b></font>&nbsp;AbstractBase {}<br>
+</font>
+
+</div>
+</td><td>
+<img src="style.png" alt="UML diagram demonstrating the use of fonts" />
+</td></tr>
+</table>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ceg-ster.html" id="previous"><strong>Previous</strong>Class Diagram Example: Class Stereotypes and Tagged Values</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./ceg-mv.html" id="next"><strong>Next</strong>Class Diagram Example: Multiple Views Through Command-Line Options</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

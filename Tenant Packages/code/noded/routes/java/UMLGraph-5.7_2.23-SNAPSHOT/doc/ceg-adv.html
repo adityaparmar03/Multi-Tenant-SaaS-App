@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Class Diagram Example: Advanced Relationships</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ceg-gen.html" />
+<link rel="next" href="./ceg-infer.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Class Diagram Example: Advanced Relationships</h1>
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+<font color="#0000ff">/*</font><br>
+<font color="#0000ff">&nbsp;* Advanced relationships</font><br>
+<font color="#0000ff">&nbsp;* UML User Guide p. 137</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @opt attributes</font><br>
+<font color="#0000ff">&nbsp;* @opt operations</font><br>
+<font color="#0000ff">&nbsp;* @hidden</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;UMLOptions {}<br>
+<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;Controller {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;EmbeddedAgent {}<br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;PowerManager {}<br>
+<br>
+<font color="#0000ff">/**</font><br>
+<font color="#0000ff">&nbsp;</font><font color="#0000ff">* @extends Controller</font><br>
+<font color="#0000ff">&nbsp;* @extends EmbeddedAgent</font><br>
+<font color="#0000ff">&nbsp;* @navassoc - - - PowerManager</font><br>
+<font color="#0000ff">&nbsp;*/</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;&nbsp;SetTopController&nbsp;<font color="#2e8b57"><b>implements</b></font>&nbsp;URLStreamHandler {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>int</b></font>&nbsp;authorizationLevel;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;startUp()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;shutDown()&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;connect()&nbsp;{}<br>
+}<br>
+<br>
+<font color="#0000ff">/** @depend -&nbsp;</font><font color="#008080">&lt;</font>friend<font color="#008080">&gt;</font><font color="#0000ff">&nbsp;- SetTopController */</font><br>
+<font color="#2e8b57"><b>class</b></font>&nbsp;ChannelIterator {}<br>
+<br>
+<font color="#2e8b57"><b>interface</b></font>&nbsp;URLStreamHandler {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;OpenConnection();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;parseURL();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;setURL();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2e8b57"><b>void</b></font>&nbsp;toExternalForm();<br>
+}<br>
+</font>
+
+</div>
+</td><td>
+<img src="advrel.gif" alt="UML diagram showing dependency and navigation relationships" />
+</td></tr></table>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ceg-gen.html" id="previous"><strong>Previous</strong>Class Diagram Example: Generalisation Relationships</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./ceg-infer.html" id="next"><strong>Next</strong>Class Diagram Example: Relationships Inference</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

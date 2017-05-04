@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Sequence Diagrams</title>
+
+<meta name="Generator" content="$Id: thread.pl,v 1.80 2013/12/20 08:42:32 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./ant.html" />
+<link rel="next" href="./seq-syntax.html" />
+
+<link href="./../noteres/notes.css" rel="stylesheet" type="text/css" id="the_css" />
+		
+</head>
+<body>
+<h1>Sequence Diagrams</h1>
+One specifies a sequence diagram using <em>pic</em> macros to define
+objects and method invocations.
+The <a href="http://www.gnu.org/software/plotutils/plotutils.html">GNU plotutils</a>
+<em>pic2plot</em> program can then process the sequence diagram to create a
+PNG, PNM, (pseudo)GIF, SVG, AI, Postscript, CGM, FIG, PCL, HPGL, Regis, or TEK
+drawing.
+<p />
+The following is an example of a specification and the resulting UML sequence
+diagram:
+<table>
+<tr><td>
+<div class="code">
+
+<font face="monospace">
+.PS<br>
+copy&nbsp;<font color="#ff00ff">&quot;sequence.pic&quot;</font>;<br>
+<br>
+<font color="#0000ff"># Define the objects</font><br>
+object(O,<font color="#ff00ff">&quot;o:Toolkit&quot;</font>);<br>
+placeholder_object(P);<br>
+step();<br>
+<br>
+<font color="#0000ff"># Message sequences</font><br>
+active(O);<br>
+step();<br>
+active(O);<br>
+message(O,O,<font color="#ff00ff">&quot;callbackLoop()&quot;</font>);<br>
+inactive(O);<br>
+create_message(O,P,<font color="#ff00ff">&quot;p:Peer&quot;</font>);<br>
+message(O,P,<font color="#ff00ff">&quot;handleExpose()&quot;</font>);<br>
+active(P);<br>
+return_message(P,O,<font color="#ff00ff">&quot;&quot;</font>);<br>
+inactive(P);<br>
+destroy_message(O,P);<br>
+inactive(O);<br>
+<br>
+<font color="#0000ff"># Complete the lifelines</font><br>
+step();<br>
+complete(O);<br>
+.PE<br>
+</font>
+
+</div>
+</td><td>
+<img src="seq-eg.gif" alt="Simple UML sequence diagram" />
+</td></tr></table>
+The diagram is drawn from its source code specification using a command
+like:
+<div class="code">
+
+<font face="monospace">
+pic2plot&nbsp;<font color="#6a5acd">-Tgif</font>&nbsp;FILENAME.pic&nbsp;<font color="#804040"><b>&gt;</b></font>FILENAME.gif<br>
+</font>
+
+</div>
+<p>
+<ul class="docnav">
+<li class="previous">
+<a accesskey="P" href="./ant.html" id="previous"><strong>Previous</strong>Running the Doclet from Ant</a>
+</li>
+<li class="contents">
+<a accesskey="C" href="index.html" id="contents"><strong>Contents</strong></a>
+</li> 
+<li class="next">
+<a accesskey="N" href="./seq-syntax.html" id="next"><strong>Next</strong>Syntax of Sequence Diagram Definitions</a>
+</li></ul>
+
+
+<p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en"><img align="left" alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: Tuesday, October 28, 2014 4:26 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/gr/deed.en">Creative Commons Attribution-Share Alike 3.0 Greece License</a>.
+</p>
+</body>
+</html>

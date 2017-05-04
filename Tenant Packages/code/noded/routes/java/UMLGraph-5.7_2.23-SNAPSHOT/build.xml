@@ -1,0 +1,262 @@
+<project name="umlgraph" default="compile" basedir="."
+ xmlns:artifact="antlib:org.apache.maven.artifact.ant" >
+
+<description>
+	The specification for the Java-based umlgraph build processes.
+</description>
+
+<!-- set global properties for this build -->
+<property name="src" location="src/main/java"/>
+<property name="testsrc" location="src/test"/>
+<property name="build" location="build"/>
+<property name="javadoc" location="javadoc"/>
+<property name="lib" location="lib"/>
+<property name="testsrc" location="test/src"/>
+<property name="testout" location="${basedir}/testdata/dot-out"/>
+<property name="testref" location="${basedir}/testdata/dot-ref"/>
+
+<property name="dist" location="dist" />
+
+<!-- obtain version from git; see http://techblog.41concepts.com/2009/05/08/generating-ant-build-numbers-using-subversion/ -->
+<macrodef name="gitversion" description="Get git version.">
+	<attribute name="outputproperty"/>
+	<sequential>
+		<echo message="git describe --abbrev=6 => '@{outputproperty}'"/>
+	<exec executable="git"
+		failonerror="true"
+		outputproperty="@{outputproperty}">
+		<arg value="describe"/>
+		<arg value="--abbrev=6"/>
+		<arg value="HEAD"/>
+		<redirector>
+			<outputfilterchain>
+			<tokenfilter>
+				<replaceregex pattern="R" replace=""/>
+				<replaceregex pattern="_" replace="."/>
+				<replaceregex pattern="-" replace="."/>
+				<replaceregex pattern="(-.*)$" replace="-SNAPSHOT"/>
+			</tokenfilter>
+			</outputfilterchain>
+		</redirector>
+		</exec>
+		<echo message="gitversion returned '${@{outputproperty}}'"/>
+	</sequential>
+</macrodef>
+
+<!-- define Maven coordinates; see https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-7c.DeploySnapshotsandStageReleaseswithAnt -->
+<property name="groupId" value="org.umlgraph" />
+<property name="artifactId" value="UmlGraph" />
+<!-- <property name="version" value="1.0-SNAPSHOT" /> -->
+<gitversion outputproperty="version"/>
+
+<!-- define artifacts' name, which follows the convention of Maven -->
+<property name="maven-jar" value="${dist}/lib/${artifactId}-${version}.jar" />
+<property name="maven-javadoc-jar" value="${dist}/lib/${artifactId}-${version}-javadoc.jar" />
+<property name="maven-sources-jar" value="${dist}/lib/${artifactId}-${version}-sources.jar" />
+
+<!-- defined maven snapshots and staging repository id and url -->
+<!-- passwords are stored in \Users\Diomidis Spinellis\.m2\settings.xml -->
+<property name="maven-snapshots-repository-id" value="sonatype-nexus-snapshots" />
+<property name="maven-snapshots-repository-url" value="https://oss.sonatype.org/content/repositories/snapshots/" />
+<property name="maven-staging-repository-id" value="sonatype-nexus-staging" />
+<property name="maven-staging-repository-url" value="https://oss.sonatype.org/service/local/staging/deploy/maven2/" />
+
+<!-- import environment variables -->
+<property environment="env"/>
+
+<target name="init">
+	<!-- Create the time stamp -->
+	<tstamp/>
+	<!-- Create the build directory structure used by compile -->
+	<mkdir dir="${build}"/>
+	<mkdir dir="${lib}"/>
+	<mkdir dir="testdata/dot-out"/>
+	<mkdir dir="${javadoc}"/>
+	<mkdir dir="${dist}/lib"/>
+</target>
+
+<target name="version">
+	<exec executable="git"
+		outputproperty="VERSION">
+		<arg value="describe"/>
+		<arg value="--abbrev=6"/>
+		<arg value="HEAD"/>
+	</exec>
+	<echo>Version is ${VERSION}</echo>
+	<echo file="src/main/java/org/umlgraph/doclet/Version.java">/* Automatically generated file */
+package org.umlgraph.doclet;
+class Version { public static String VERSION = "${VERSION}";}
+	</echo>
+</target>
+
+<target name="compile" depends="init,version"
+	description="compile the source, build library " >
+	<javac srcdir="${src}" destdir="${build}" debug="true"
+		deprecation="true" includeantruntime="false" >
+		<compilerarg value="-Xlint"/>
+		 <classpath>
+		   <pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
+		 </classpath>
+	</javac>
+	<jar basedir="${build}" destfile="${lib}/UmlGraph.jar" includes="org/umlgraph/doclet/*.class">
+		<manifest>
+			<attribute name="Main-Class" value="org.umlgraph.doclet.UmlGraph"/>
+			<attribute name="Class-Path" value="tools.jar"/>
+		</manifest>
+	</jar>
+</target>
+
+<target name="testcompile" depends="init"
+	description="compile the test code " >
+	<javac srcdir="${testsrc}" destdir="${build}" debug="true"
+		deprecation="true" includeantruntime="false" >
+         <classpath>
+           <pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
+         </classpath>
+		<compilerarg value="-Xlint"/>
+	</javac>
+</target>
+
+<target name="test" depends="compile,testcompile"
+	description="run the regression tests" >
+	<java classname="org.umlgraph.test.BasicTest" fork="true">
+         <classpath>
+           <pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
+           <pathelement location="${build}"/>
+           <pathelement location="${lib}/UmlGraph.jar"/>
+         </classpath>
+    </java>
+	<java classname="org.umlgraph.test.UmlDocTest" fork="true">
+	         <classpath>
+	           <pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
+	           <pathelement location="${build}"/>
+	           <pathelement location="${lib}/UmlGraph.jar"/>
+	         </classpath>
+	    </java>
+	<apply executable="dot" dest="${testout}" parallel="false">
+		<arg value="-Tpng"/>
+		<arg value="-o"/>
+		<targetfile/>
+		<srcfile/>
+	  <fileset dir="${testout}" includes="*.dot"/>
+	  <mapper type="glob" from="*.dot" to="*.png"/>
+	</apply>
+	<apply executable="dot" dest="${testref}" parallel="false">
+		<arg value="-Tpng"/>
+		<arg value="-o"/>
+		<targetfile/>
+		<srcfile/>
+	  <fileset dir="${testref}" includes="*.dot"/>
+	  <mapper type="glob" from="*.dot" to="*.png"/>
+	</apply>
+</target>
+
+<target name="javadocs" depends="compile">
+	<javadoc sourcepath="${src}" packagenames="org.umlgraph.doclet.*" destdir="${javadoc}" private="true">
+		<doclet name="org.umlgraph.doclet.UmlGraphDoc" path="${lib}/UmlGraph.jar">
+			<param name="-inferrel"/>
+			<param name="-inferdep"/>
+			<param name="-collapsible"/>
+			<param name="-hide" value="java.*"/>
+			<param name="-collpackages" value="java.util.*"/>
+			<param name="-qualify"/>
+			<param name="-postfixpackage"/>
+			<param name="-nodefontsize" value="9"/>
+			<param name="-nodefontpackagesize" value="7"/>
+			<param name="-link" value="http://docs.oracle.com/javase/7/docs/jdk/api/javadoc/doclet/"/>
+			<param name="-link" value="http://download.oracle.com/javase/7/docs/api/"/>
+		</doclet>
+	</javadoc>
+</target>
+
+<target name="pom" description="generate the pom.xml file with the correct version">
+	<copy file="pom.template.xml"
+		tofile="pom.xml"
+		filtering="yes" overwrite="yes">
+	<filterchain>
+		<filterreader classname="org.apache.tools.ant.filters.ExpandProperties"/>
+	</filterchain>
+	</copy>
+</target>
+
+<target name="dist" depends="compile" description="generate the distribution">
+	<!-- build the main artifact -->
+	<jar jarfile="${maven-jar}" basedir="${build}" />
+
+	<!-- build the javadoc artifact -->
+	<javadoc sourcepath="${src}" destdir="${dist}/javadoc" />
+	<jar jarfile="${maven-javadoc-jar}">
+		<fileset dir="${dist}/javadoc" />
+	</jar>
+
+	<!-- build the sources artifact -->
+	<jar jarfile="${maven-sources-jar}">
+		<fileset dir="${src}" />
+	</jar>
+</target>
+
+<target name="deploy" depends="dist,pom" description="deploy snapshot version to Maven snapshot repository">
+	<!-- for this to work install http://maven.apache.org/ant-tasks/download.html into ant/lib -->
+	<artifact:mvn>
+		<arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
+		<arg value="-Durl=${maven-snapshots-repository-url}" />
+		<arg value="-DrepositoryId=${maven-snapshots-repository-id}" />
+		<arg value="-DpomFile=pom.xml" />
+		<arg value="-Dfile=${maven-jar}" />
+	</artifact:mvn>
+	<artifact:mvn>
+		<arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
+		<arg value="-Durl=${maven-snapshots-repository-url}" />
+		<arg value="-DrepositoryId=${maven-snapshots-repository-id}" />
+		<arg value="-DpomFile=pom.xml" />
+		<arg value="-Dfile=${maven-sources-jar}" />
+		<arg value="-Dclassifier=sources" />
+	</artifact:mvn>
+
+	<!-- sign and deploy the javadoc artifact -->
+	<artifact:mvn>
+		<arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
+		<arg value="-Durl=${maven-snapshots-repository-url}" />
+		<arg value="-DrepositoryId=${maven-snapshots-repository-id}" />
+		<arg value="-DpomFile=pom.xml" />
+		<arg value="-Dfile=${maven-javadoc-jar}" />
+		<arg value="-Dclassifier=javadoc" />
+	</artifact:mvn>
+</target>
+
+<!-- before this, update project version (both build.xml and pom.xml) from SNAPSHOT to RELEASE -->
+<target name="stage" depends="dist,pom" description="deploy release version to Maven staging repository">
+	<!-- sign and deploy the main artifact -->
+	<artifact:mvn>
+		<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.3:sign-and-deploy-file" />
+		<arg value="-Durl=${maven-staging-repository-url}" />
+		<arg value="-DrepositoryId=${maven-staging-repository-id}" />
+		<arg value="-DpomFile=pom.xml" />
+		<arg value="-Dfile=${maven-jar}" />
+		<arg value="-Pgpg" />
+	</artifact:mvn>
+
+	<!-- sign and deploy the sources artifact -->
+	<artifact:mvn>
+		<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.3:sign-and-deploy-file" />
+		<arg value="-Durl=${maven-staging-repository-url}" />
+		<arg value="-DrepositoryId=${maven-staging-repository-id}" />
+		<arg value="-DpomFile=pom.xml" />
+		<arg value="-Dfile=${maven-sources-jar}" />
+		<arg value="-Dclassifier=sources" />
+		<arg value="-Pgpg" />
+	</artifact:mvn>
+
+	<!-- sign and deploy the javadoc artifact -->
+	<artifact:mvn>
+		<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.3:sign-and-deploy-file" />
+		<arg value="-Durl=${maven-staging-repository-url}" />
+		<arg value="-DrepositoryId=${maven-staging-repository-id}" />
+		<arg value="-DpomFile=pom.xml" />
+		<arg value="-Dfile=${maven-javadoc-jar}" />
+		<arg value="-Dclassifier=javadoc" />
+		<arg value="-Pgpg" />
+	</artifact:mvn>
+</target>
+
+</project>
