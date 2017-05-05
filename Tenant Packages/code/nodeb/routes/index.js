@@ -40,7 +40,7 @@ router.post('/tbupload', function(req, res) {
     form.multiples = true;
 
     // store all uploads in the /uploads directory
-    form.uploadDir = path.join(__dirname, '/java');
+    form.uploadDir = path.join(__dirname, '/javab');
 
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
@@ -73,7 +73,7 @@ router.post('/tbgetDiagram',function (req,res,next){
         // res.send(500,'showAlert')
         // res.redirect(index.ejs);
 
-        res.render('index', {filename:"",visibility:'hidden',errmsg:"Please upload file."});
+        res.render('index', {filename:"",visibility:'hidden',errmsg:"Please upload file.",datacnf:""});
 
     }
     else {
@@ -81,7 +81,7 @@ router.post('/tbgetDiagram',function (req,res,next){
         var foldername = filename.substring(0, filename.lastIndexOf('.'));
         pngname ="tenantb.svg";
 
-        var dir = __dirname+"/java/";
+        var dir = __dirname+"/javab/";
         var jar = dir+"UMLParser.jar";
         var fpath = dir+filename;
 
@@ -107,7 +107,7 @@ router.post('/tbgetDiagram',function (req,res,next){
                 }
 
 
-                res.render('index', {filename:'/java/'+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:""});
+                res.render('index', {filename:'/javab/'+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:""});
                 uploadedfilename="";
                 filename="";
 
@@ -141,7 +141,7 @@ router.post('/tbgetScore',function (req,res,next) {
     });
     if (score.length == 0)
     {
-        res.render('index', {filename:"/java/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"Please Enter your comments."});
+        res.render('index', {filename:"/javab/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"Please Enter your comments."});
 
 
     }
@@ -151,7 +151,7 @@ router.post('/tbgetScore',function (req,res,next) {
             if (!error)
             {
                 console.log("successfull connection");
-                connection.query("INSERT INTO `grader`.`Tenant_Data` (`tablename`, `column1`,`column2`) VALUES ('TA','"+score+"','"+point+"');",function (error) {
+                connection.query("INSERT INTO `grader`.`TENANT_DATA` (`TENANT_ID`, `TENANT_TABLE`, `COLUMN_1`,`COLUMN_2`) VALUES ('TB', 'TenantB', '"+score+"','"+point+"');",function (error){
                     if (error)
                     {
                         console.log("Data not inserted"+error);
@@ -176,12 +176,12 @@ router.post('/tbgetScore',function (req,res,next) {
         })
         if(haserr)
         {
-            res.render('index', {filename:"/java/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"something went wrong !!"});
+            res.render('index', {filename:"/javab/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"something went wrong !!"});
 
         }
         else
         {
-            res.render('index', {filename:"/java/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"Tenant is graded successfully."});
+            res.render('index', {filename:"/javab/"+pngname,visibility:'visible',errmsg:"Diagram:",datacnf:"Tenant is graded successfully."});
 
         }
     }
