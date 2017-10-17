@@ -1,0 +1,29 @@
+Objectives:
+In this project, you will be creating a Multi-Tenant, Cloud Scale, Multi-AZ SaaS App in your Amazon Web Services.
+Operations Requirements:
+•	Your solution must be contained within a VPC in Oregon (US-WEST-2)
+•	You must have at least two AZs (with a Max of 3 AZs) in your solution
+•	You must use Amazon Elastic Load Balancer (Classic or App Gateway)
+•	You must be able to provide evidence via demonstration of your Elastic Scale design.
+•	You must pair up with at least two students from CMPE 202
+•	Each student is a "tenant" and must be isolated within their own AMI/Instance(s).
+•	Your solution must support Data Multi-Tenancy by managing either Extension Columns or Tables in a single Relational Database using Amazon RDS.
+Application Requirements:
+•	Students from CMPE 202 will be working on a UML Parser App (Java App/JAR) that takes Java Source Code and generates a UML Diagram Output (Image / JPG, PNG, SVG).
+•	Your job for this project is to build a Single Page App for the Java Source Code to be submitted and graded.
+•	Provide a "Grader" login that will then "Pin" all interactions with the App to the respective Tenant Instances.  You can use User ID to identify which Tenant.
+•	Work with each of the CMPE 202 students to package their solutions into AMIs for Cloud Deployment.
+•	For Grading Page, you must allow Tenant Specific customization such that grading Attributes (Scale, Points, Complete/Not Complete, and Comments) can be customized.
+Language, Frameworks & Tools:
+•	This Project is focused on your Design and Use of AWS for Cloud Scale Deployment. 
+•	As such, the Programming Language / Frameworks you use is up to your choosing.
+•	Examples Include: 
+o	PHP
+o	Java/JSP
+o	Scala/Play
+o	Grails/GSP
+o	Ruby on Rails
+o	Node.js
+o	Go
+o	Python/Django
+
