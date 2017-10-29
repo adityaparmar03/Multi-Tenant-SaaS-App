@@ -3,6 +3,6 @@
 
 <a href="https://youtu.be/q-AA4KvQoLU"
 target="_blank"><img src="/cover.png" 
-alt="Multi-Tenant SAAS Aplication" width="489" height="360" border="10" /></a>
+alt="Multi-Tenant SAAS Aplication" width="480" height="480" border="10" /></a>
 
 
